@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\ArcherTowerFactory.cs" />
+    <Compile Include="Factories\CannonTowerFactory.cs" />
+    <Compile Include="Factories\ITowerFactory.cs" />
+    <Compile Include="Towers\ArcherTower.cs" />
+    <Compile Include="Towers\CannonTower.cs" />
+    <Compile Include="Towers\ITower.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,5 +61,6 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
