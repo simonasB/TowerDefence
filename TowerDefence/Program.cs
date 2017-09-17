@@ -7,15 +7,16 @@ namespace TowerDefence {
     public class Program {
         public static void Main(string[] args) {
             Logger.Instance().Info("Test logging");
-            Console.ReadLine();
 
             ITowerFactory towerFactory = LoadFactory();
 
             ITower tower = towerFactory.CreateTower();
 
-            Console.WriteLine(tower.getName());
-            Console.WriteLine(tower.getDamage());
-            Console.WriteLine(tower.getRange());
+            Console.WriteLine(tower.Name);
+            Console.WriteLine(tower.Damage);
+            Console.WriteLine(tower.Range);
+
+            Console.ReadLine();
         }
 
         static ITowerFactory LoadFactory()

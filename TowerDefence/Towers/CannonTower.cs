@@ -1,24 +1,17 @@
-﻿namespace TowerDefence.Towers
-{
-    class CannonTower : ITower
-    {
-        string name = "Cannon tower";
-        int damage = 20;
-        int range = 1;
+﻿namespace TowerDefence.Towers {
+    public class CannonTower : ITower {
+        public string Name { get; } = "Cannon tower";
 
-        public int getDamage()
-        {
-            return damage;
+        public int Damage { get; } = 20;
+
+        public int Range { get; } = 1;
+
+        public void StartAttack() {
+            throw new System.NotImplementedException();
         }
 
-        public int getRange()
-        {
-            return range;
-        }
-
-        public string getName()
-        {
-            return name;
+        public void StopAttack() {
+            throw new System.NotImplementedException();
         }
     }
 }

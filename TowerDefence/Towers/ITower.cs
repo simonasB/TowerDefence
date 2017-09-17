@@ -2,8 +2,11 @@
 {
     public interface ITower
     {
-        string getName();
-        int getDamage();
-        int getRange();
+        string Name { get; }
+        int Damage { get; }
+        int Range { get; }
+
+        void StartAttack();
+        void StopAttack();
     }
 }

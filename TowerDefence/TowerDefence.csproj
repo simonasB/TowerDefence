@@ -48,6 +48,14 @@
     <Compile Include="Factories\ArcherTowerFactory.cs" />
     <Compile Include="Factories\CannonTowerFactory.cs" />
     <Compile Include="Factories\ITowerFactory.cs" />
+    <Compile Include="Minions\Beasts\BeastFactory.cs" />
+    <Compile Include="Minions\Demons\DemonFactory.cs" />
+    <Compile Include="Minions\Dragons\DragonFactory.cs" />
+    <Compile Include="Minions\Dragons\IntermediateDragon.cs" />
+    <Compile Include="Minions\Dragons\StrongDragon.cs" />
+    <Compile Include="Minions\IMinion.cs" />
+    <Compile Include="Minions\IMinionFactory.cs" />
+    <Compile Include="Minions\Dragons\WeakDragon.cs" />
     <Compile Include="Towers\ArcherTower.cs" />
     <Compile Include="Towers\CannonTower.cs" />
     <Compile Include="Towers\ITower.cs" />
