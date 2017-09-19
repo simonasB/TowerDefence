@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace TowerDefence.Common {
     public static class ReflectionUtilities {
-        public static Dictionary<string, Type> GetTypesAssignableFromInterface(Type interfaceType) {
+        public static Dictionary<string, Type> GetTypesImplementingInterface(Type interfaceType) {
             var types = new Dictionary<string, Type>();
 
             Type[] typesInThisAssembly = Assembly.GetExecutingAssembly().GetTypes();
