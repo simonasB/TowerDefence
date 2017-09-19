@@ -45,9 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factories\ArcherTowerFactory.cs" />
-    <Compile Include="Factories\CannonTowerFactory.cs" />
-    <Compile Include="Factories\ITowerFactory.cs" />
+    <Compile Include="Common\IFactoryProvider.cs" />
+    <Compile Include="Common\ReflectionUtilities.cs" />
+    <Compile Include="Towers\Factories\ArcherTowerFactory.cs" />
+    <Compile Include="Towers\Factories\CannonTowerFactory.cs" />
+    <Compile Include="Towers\Factories\ITowerFactory.cs" />
     <Compile Include="Minions\Beasts\BeastFactory.cs" />
     <Compile Include="Minions\Beasts\IntermediateBeast.cs" />
     <Compile Include="Minions\Beasts\StrongBeast.cs" />

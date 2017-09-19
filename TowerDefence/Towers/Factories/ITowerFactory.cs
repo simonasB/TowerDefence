@@ -1,6 +1,4 @@
-﻿using TowerDefence.Towers;
-
-namespace TowerDefence.Factories
+﻿namespace TowerDefence.Towers.Factories
 {
     public interface ITowerFactory
     {

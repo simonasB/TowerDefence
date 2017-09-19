@@ -1,15 +1,15 @@
-﻿namespace TowerDefence.Minions {
+﻿namespace TowerDefence.Minions.Beasts {
     public class BeastFactory : IMinionFactory {
         public IMinion CreateStrongMinion() {
-            throw new System.NotImplementedException();
+            return new StrongBeast();
         }
 
         public IMinion CreateIntermediateMinion() {
-            throw new System.NotImplementedException();
+            return new IntermediateBeast();
         }
 
         public IMinion CreateWeakMinion() {
-            throw new System.NotImplementedException();
+            return new WeakBeast();
         }
     }
 }
