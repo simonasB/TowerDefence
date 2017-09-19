@@ -6,7 +6,6 @@
         int Damage { get; }
         int Range { get; }
 
-        void StartAttack();
-        void StopAttack();
+        void Attack();
     }
 }

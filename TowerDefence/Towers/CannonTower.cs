@@ -1,4 +1,6 @@
-﻿namespace TowerDefence.Towers {
+﻿using System;
+
+namespace TowerDefence.Towers {
     public class CannonTower : ITower {
         public string Name { get; } = "Cannon tower";
 
@@ -6,12 +8,8 @@
 
         public int Range { get; } = 1;
 
-        public void StartAttack() {
-            throw new System.NotImplementedException();
-        }
-
-        public void StopAttack() {
-            throw new System.NotImplementedException();
+        public void Attack() {
+            Console.WriteLine($"{nameof(CannonTower)} starts attack");
         }
     }
 }

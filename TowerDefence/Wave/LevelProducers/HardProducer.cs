@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TowerDefence.Wave.Levels;
 
 namespace TowerDefence.Wave.LevelProducers
 {
     class HardProducer : IWaveProducer
     {
-        public Wave produce()
+        public Wave Produce()
         {
             throw new NotImplementedException();
         }

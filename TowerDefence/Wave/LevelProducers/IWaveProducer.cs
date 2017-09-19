@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TowerDefence.Wave.Levels
+﻿namespace TowerDefence.Wave.LevelProducers
 {
-    interface IWaveProducer
+    public interface IWaveProducer
     {
-        Wave produce();
+        Wave Produce();
     }
 }

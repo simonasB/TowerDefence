@@ -1,29 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TowerDefence.Wave.Levels;
+﻿using TowerDefence.Wave.LevelProducers;
 
 namespace TowerDefence.Wave
 {
-    class WaveContext
+    public class WaveContext
     {
-        private IWaveProducer waveProducer;
+        private IWaveProducer _waveProducer;
 
         public WaveContext(IWaveProducer waveProducer)
         {
-            this.waveProducer = waveProducer;
+            this._waveProducer = waveProducer;
         }
 
-        public void changeProducer(IWaveProducer waveProducer)
+        public void ChangeProducer(IWaveProducer waveProducer)
         {
-            this.waveProducer = waveProducer;
+            this._waveProducer = waveProducer;
         }
 
-        public Wave getCurrentWave()
+        public Wave GetCurrentWave()
         {
-            return waveProducer.produce();
+            return _waveProducer.Produce();
         }
 
     }

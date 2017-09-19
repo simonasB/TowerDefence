@@ -49,7 +49,13 @@
     <Compile Include="Factories\CannonTowerFactory.cs" />
     <Compile Include="Factories\ITowerFactory.cs" />
     <Compile Include="Minions\Beasts\BeastFactory.cs" />
+    <Compile Include="Minions\Beasts\IntermediateBeast.cs" />
+    <Compile Include="Minions\Beasts\StrongBeast.cs" />
+    <Compile Include="Minions\Beasts\WeakBeast.cs" />
     <Compile Include="Minions\Demons\DemonFactory.cs" />
+    <Compile Include="Minions\Demons\IntermediateDemon.cs" />
+    <Compile Include="Minions\Demons\StrongDemon.cs" />
+    <Compile Include="Minions\Demons\WeakDemon.cs" />
     <Compile Include="Minions\Dragons\DragonFactory.cs" />
     <Compile Include="Minions\Dragons\IntermediateDragon.cs" />
     <Compile Include="Minions\Dragons\StrongDragon.cs" />

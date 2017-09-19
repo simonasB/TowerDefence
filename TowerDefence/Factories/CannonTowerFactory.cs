@@ -2,7 +2,7 @@
 
 namespace TowerDefence.Factories
 {
-    class CannonTowerFactory : ITowerFactory
+    public class CannonTowerFactory : ITowerFactory
     {
         public ITower CreateTower()
         {
