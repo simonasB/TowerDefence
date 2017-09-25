@@ -8,7 +8,7 @@ namespace TowerDefence.Common {
 
     public class FactoryProvider<TFactory> : IFactoryProvider<TFactory> where TFactory : class {
         private readonly Dictionary<string, Type> _factories =
-            ReflectionUtilities.GetTypesAssignableFromInterface(typeof(TFactory));
+            ReflectionUtilities.GetTypesImplementingInterface(typeof(TFactory));
 
         public TFactory GetFactory(string name) {
             if (_factories.TryGetValue(name, out var type)) {
