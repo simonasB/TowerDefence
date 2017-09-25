@@ -11,8 +11,8 @@ namespace TowerDefence.Wave.LevelProducers
     {
         private readonly IFactoryProvider<IMinionFactory> _minionFactoryProvider;
 
-        public HardProducer(IFactoryProvider<IMinionFactory> minionFactoryProvider) {
-            _minionFactoryProvider = minionFactoryProvider;
+        public HardProducer() {
+            _minionFactoryProvider = new FactoryProvider<IMinionFactory>();
         }
         public Wave Produce() {
             var minions = new List<IMinion>();

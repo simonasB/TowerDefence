@@ -7,6 +7,7 @@ using TowerDefence.Minions.Beasts;
 using TowerDefence.Towers;
 using TowerDefence.Towers.Factories;
 using TowerDefence.Wave.LevelProducers;
+using TowerDefence.Wave;
 
 namespace TowerDefence {
     public class Program {
@@ -26,13 +27,15 @@ namespace TowerDefence {
             var minion = factory.CreateIntermediateMinion();
             Logger.Instance().Info($"Health:{minion.Health}, Name: {minion.Name}");
 
-            Wave.WaveContext waveContext = new Wave.WaveContext(new HardProducer(new FactoryProvider<IMinionFactory>()));
+            // Strategy pattern example using Wave
+            WaveContext waveContext = new WaveContext(new HardProducer());
             var wave = waveContext.GetWave();
             Logger.Instance().Info($"Wave minion count: {wave.Minions.Count}");
 
-            waveContext = new Wave.WaveContext(new EasyProducer(new FactoryProvider<IMinionFactory>()));
+            waveContext = new WaveContext(new EasyProducer());
             wave = waveContext.GetWave();
             Logger.Instance().Info($"Wave minion count: {wave.Minions.Count}");
+            // End of strategy pattern example
 
             Console.ReadLine();
         }
@@ -48,8 +51,8 @@ namespace TowerDefence {
             return new FactoryProvider<T>().GetFactory(name);
         }
 
-        static Wave.Wave ProduceWave() {
-            return new HardProducer(new FactoryProvider<IMinionFactory>()).Produce();
-        }
+        //static Wave.Wave ProduceWave() {
+        //    return new HardProducer(new FactoryProvider<IMinionFactory>()).Produce();
+        //}
     }
 }
