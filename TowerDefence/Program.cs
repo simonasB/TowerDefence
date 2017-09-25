@@ -50,9 +50,5 @@ namespace TowerDefence {
         static T GetFactory<T>(string name) where T : class {
             return new FactoryProvider<T>().GetFactory(name);
         }
-
-        //static Wave.Wave ProduceWave() {
-        //    return new HardProducer(new FactoryProvider<IMinionFactory>()).Produce();
-        //}
     }
 }
