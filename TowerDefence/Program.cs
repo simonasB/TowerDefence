@@ -26,8 +26,12 @@ namespace TowerDefence {
             var minion = factory.CreateIntermediateMinion();
             Logger.Instance().Info($"Health:{minion.Health}, Name: {minion.Name}");
 
-            var wave = ProduceWave();
+            Wave.WaveContext waveContext = new Wave.WaveContext(new HardProducer(new FactoryProvider<IMinionFactory>()));
+            var wave = waveContext.GetWave();
+            Logger.Instance().Info($"Wave minion count: {wave.Minions.Count}");
 
+            waveContext = new Wave.WaveContext(new EasyProducer(new FactoryProvider<IMinionFactory>()));
+            wave = waveContext.GetWave();
             Logger.Instance().Info($"Wave minion count: {wave.Minions.Count}");
 
             Console.ReadLine();

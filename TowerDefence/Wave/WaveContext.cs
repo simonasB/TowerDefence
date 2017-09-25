@@ -11,12 +11,7 @@ namespace TowerDefence.Wave
             this._waveProducer = waveProducer;
         }
 
-        public void ChangeProducer(IWaveProducer waveProducer)
-        {
-            this._waveProducer = waveProducer;
-        }
-
-        public Wave GetCurrentWave()
+        public Wave GetWave()
         {
             return _waveProducer.Produce();
         }
