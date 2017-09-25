@@ -26,12 +26,14 @@ namespace TowerDefence {
             var minion = factory.CreateIntermediateMinion();
             Logger.Instance().Info($"Health:{minion.Health}, Name: {minion.Name}");
 
+            ReflectionFactoryProvider<IMinionFactory> reflectiveMinionFactory = new ReflectionFactoryProvider<IMinionFactory>();
+
             // Strategy pattern example using Wave
-            WaveContext waveContext = new WaveContext(new HardProducer());
+            WaveContext waveContext = new WaveContext(new HardProducer(reflectiveMinionFactory));
             var wave = waveContext.GetWave();
             Logger.Instance().Info($"Wave minion count: {wave.Minions.Count}");
 
-            waveContext = new WaveContext(new EasyProducer());
+            waveContext = new WaveContext(new EasyProducer(reflectiveMinionFactory));
             wave = waveContext.GetWave();
             Logger.Instance().Info($"Wave minion count: {wave.Minions.Count}");
             // End of strategy pattern example
@@ -47,7 +49,7 @@ namespace TowerDefence {
         }
 
         static T GetFactory<T>(string name) where T : class {
-            return new FactoryProvider<T>().GetFactory(name);
+            return new ReflectionFactoryProvider<T>().GetFactory(name);
         }
     }
 }
