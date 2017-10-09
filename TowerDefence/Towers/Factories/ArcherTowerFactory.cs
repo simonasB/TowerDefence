@@ -1,10 +1,12 @@
-﻿namespace TowerDefence.Towers.Factories
+﻿using TowerDefence.Towers.Attack;
+
+namespace TowerDefence.Towers.Factories
 {
     public class ArcherTowerFactory : ITowerFactory
     {
-        public ITower CreateTower()
+        public AbstractTower CreateTower(IAttack AttackType)
         {
-            return new ArcherTower();
+            return new ArcherTower(AttackType);
         }
     }
 }
