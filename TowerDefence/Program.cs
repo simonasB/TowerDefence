@@ -7,6 +7,7 @@ using TowerDefence.Towers;
 using TowerDefence.Towers.Factories;
 using TowerDefence.Wave.LevelProducers;
 using TowerDefence.Wave;
+using TowerDefence.Towers.Attack;
 
 namespace TowerDefence {
     public class Program {
@@ -15,11 +16,13 @@ namespace TowerDefence {
 
             ITowerFactory towerFactory = LoadFactory();
 
-            ITower tower = towerFactory.CreateTower();
+            AbstractTower tower = towerFactory.CreateTower(new MediumAttack());
 
             Console.WriteLine(tower.Name);
             Console.WriteLine(tower.Damage);
             Console.WriteLine(tower.Range);
+
+            tower.Attack();
 
             var factory = GetFactory<IMinionFactory>(nameof(BeastFactory));
 

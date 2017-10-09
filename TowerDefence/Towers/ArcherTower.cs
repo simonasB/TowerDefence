@@ -1,15 +1,18 @@
 ﻿using System;
+using TowerDefence.Towers.Attack;
 
 namespace TowerDefence.Towers {
-    public class ArcherTower : ITower {
-        public string Name { get; } = "Archer tower";
+    public class ArcherTower : AbstractTower { 
+        public ArcherTower(IAttack AttackType) : base(AttackType)
+        {
+            Name = "Archer tower";
+            Damage = 10;
+            Range = 2;
+        }
 
-        public int Damage { get; } = 10;
-
-        public int Range { get; } = 2;
-
-        public void Attack() {
+        public new void Attack() {
             Console.WriteLine($"{nameof(ArcherTower)} starts attack");
+            AttackType.Attack();
         }
     }
 }

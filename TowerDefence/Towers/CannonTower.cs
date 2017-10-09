@@ -1,15 +1,19 @@
 ﻿using System;
+using TowerDefence.Towers.Attack;
 
 namespace TowerDefence.Towers {
-    public class CannonTower : ITower {
-        public string Name { get; } = "Cannon tower";
+    public class CannonTower : AbstractTower {
 
-        public int Damage { get; } = 20;
+        public CannonTower(IAttack AttackType) : base(AttackType)
+        {
+            Name = "Cannon tower";
+            Damage = 20;
+            Range = 1;
+        }
 
-        public int Range { get; } = 1;
-
-        public void Attack() {
+        public new void Attack() {
             Console.WriteLine($"{nameof(CannonTower)} starts attack");
+            AttackType.Attack();
         }
     }
 }

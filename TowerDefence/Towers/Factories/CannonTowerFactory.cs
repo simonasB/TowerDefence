@@ -1,10 +1,12 @@
-﻿namespace TowerDefence.Towers.Factories
+﻿using TowerDefence.Towers.Attack;
+
+namespace TowerDefence.Towers.Factories
 {
     public class CannonTowerFactory : ITowerFactory
     {
-        public ITower CreateTower()
+        public AbstractTower CreateTower(IAttack AttackType)
         {
-            return new CannonTower();
+            return new CannonTower(AttackType);
         }
     }
 }

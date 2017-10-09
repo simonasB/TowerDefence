@@ -47,6 +47,10 @@
   <ItemGroup>
     <Compile Include="Common\IFactoryProvider.cs" />
     <Compile Include="Common\ReflectionUtilities.cs" />
+    <Compile Include="Towers\Attack\EasyAttack.cs" />
+    <Compile Include="Towers\Attack\HardAttack.cs" />
+    <Compile Include="Towers\Attack\IAttack.cs" />
+    <Compile Include="Towers\Attack\MediumAttack.cs" />
     <Compile Include="Towers\Factories\ArcherTowerFactory.cs" />
     <Compile Include="Towers\Factories\CannonTowerFactory.cs" />
     <Compile Include="Towers\Factories\ITowerFactory.cs" />
@@ -66,7 +70,7 @@
     <Compile Include="Minions\Dragons\WeakDragon.cs" />
     <Compile Include="Towers\ArcherTower.cs" />
     <Compile Include="Towers\CannonTower.cs" />
-    <Compile Include="Towers\ITower.cs" />
+    <Compile Include="Towers\AbstractTower.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
