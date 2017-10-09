@@ -6,7 +6,7 @@ namespace TowerDefence.Towers
     {
         public string Name { get; set; }
         public int Damage { get; set; }
-        public int Range { get; set; }
+        public int Range { get; set;}
         protected IAttack AttackType;
 
         public AbstractTower(IAttack AttackType)
@@ -14,7 +14,7 @@ namespace TowerDefence.Towers
             this.AttackType = AttackType;
         }
 
-        public void Attack()
+        public virtual void Attack()
         {
             AttackType.Attack();
         }

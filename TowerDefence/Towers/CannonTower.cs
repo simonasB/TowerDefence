@@ -11,7 +11,7 @@ namespace TowerDefence.Towers {
             Range = 1;
         }
 
-        public new void Attack() {
+        public override void Attack() {
             Console.WriteLine($"{nameof(CannonTower)} starts attack");
             AttackType.Attack();
         }

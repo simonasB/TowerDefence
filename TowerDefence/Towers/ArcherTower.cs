@@ -10,7 +10,7 @@ namespace TowerDefence.Towers {
             Range = 2;
         }
 
-        public new void Attack() {
+        public override void Attack() {
             Console.WriteLine($"{nameof(ArcherTower)} starts attack");
             AttackType.Attack();
         }
