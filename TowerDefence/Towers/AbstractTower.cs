@@ -9,7 +9,7 @@ namespace TowerDefence.Towers
         public int Range { get; set;}
         protected IAttack AttackType;
 
-        public AbstractTower(IAttack AttackType)
+        protected AbstractTower(IAttack AttackType)
         {
             this.AttackType = AttackType;
         }

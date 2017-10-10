@@ -8,6 +8,7 @@ using TowerDefence.Towers.Factories;
 using TowerDefence.Wave.LevelProducers;
 using TowerDefence.Wave;
 using TowerDefence.Towers.Attack;
+using TowerDefence.Towers.Decorators;
 
 namespace TowerDefence {
     public class Program {
@@ -23,6 +24,10 @@ namespace TowerDefence {
             Console.WriteLine(tower.Range);
 
             tower.Attack();
+            Console.WriteLine("Damage before: " + tower.Damage);
+            MissedAttacks missedAttacks = new MissedAttacks(tower);
+            Console.WriteLine("Damage after: " + missedAttacks.Damage);
+            missedAttacks.Attack();
 
             var factory = GetFactory<IMinionFactory>(nameof(BeastFactory));
 
