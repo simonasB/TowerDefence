@@ -8,7 +8,7 @@ namespace TowerDefence.Towers.Attack
 {
     public interface IAttack
     {
-        float impact { get; }
+        float Impact { get; }
 
         void Attack();
     }

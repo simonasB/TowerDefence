@@ -8,11 +8,11 @@ namespace TowerDefence.Towers.Attack
 {
     public class EasyAttack : IAttack
     {
-        public float impact { get; } = 0.1f;
+        public float Impact { get; } = 0.1f;
 
         public void Attack()
         {
-            Console.WriteLine("Attacking enemy with easy impact: " + impact);
+            Console.WriteLine("Attacking enemy with easy impact: " + Impact);
         }
     }
 }

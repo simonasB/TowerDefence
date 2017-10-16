@@ -8,11 +8,11 @@ namespace TowerDefence.Towers.Attack
 {
     public class HardAttack : IAttack
     {
-        public float impact { get; } = 0.8f;
+        public float Impact { get; } = 0.8f;
 
         public void Attack()
         {
-            Console.WriteLine("Attacking enemy with hard impact: " + impact);
+            Console.WriteLine("Attacking enemy with hard impact: " + Impact);
         }
     }
 }

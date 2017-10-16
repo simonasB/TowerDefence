@@ -8,11 +8,11 @@ namespace TowerDefence.Towers.Attack
 {
     public class MediumAttack : IAttack
     {
-        public float impact { get; } = 0.4f;
+        public float Impact { get; } = 0.4f;
 
         public void Attack()
         {
-            Console.WriteLine("Attacking enemy with medium impact: " + impact);
+            Console.WriteLine("Attacking enemy with medium impact: " + Impact);
         }
     }
 }
