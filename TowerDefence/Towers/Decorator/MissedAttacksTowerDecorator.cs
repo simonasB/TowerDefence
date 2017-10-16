@@ -5,10 +5,10 @@
 
         public MissedAttacksTowerDecorator(AbstractTower tower) : base(tower) {
             Damage = _tower.Damage - DecreasedDamage;
-            EnhanceTower();
+            WeakenTower();
         }
 
-        private void EnhanceTower() {
+        private void WeakenTower() {
             Range = _tower.Range + DecreasedDamage;
             Logger.Instance()
                 .Info(
