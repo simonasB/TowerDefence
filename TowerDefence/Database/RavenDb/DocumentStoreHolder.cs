@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Raven.Client;
 using Raven.Client.Embedded;
 
@@ -11,7 +12,7 @@ namespace TowerDefence.Database.RavenDb
 
         private static IDocumentStore CreateStore() {
             IDocumentStore store = new EmbeddableDocumentStore {
-                DataDirectory = ""
+                DataDirectory = Path.Combine(Directory.GetCurrentDirectory(), "ravenTD")
             }.Initialize();
 
             return store;

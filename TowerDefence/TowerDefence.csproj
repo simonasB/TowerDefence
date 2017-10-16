@@ -70,9 +70,8 @@
     <Compile Include="Towers\Attack\HardAttack.cs" />
     <Compile Include="Towers\Attack\IAttack.cs" />
     <Compile Include="Towers\Attack\MediumAttack.cs" />
-    <Compile Include="Towers\Decorator\KilledMinions.cs" />
-    <Compile Include="Towers\Decorator\MissedAttacks.cs" />
-    <Compile Include="Towers\Decorator\SuccessfulAttacks.cs" />
+    <Compile Include="Towers\Decorator\KilledMinionsTowerDecorator.cs" />
+    <Compile Include="Towers\Decorator\MissedAttacksTowerDecorator.cs" />
     <Compile Include="Towers\Decorator\TowerDecorator.cs" />
     <Compile Include="Towers\Factories\ArcherTowerFactory.cs" />
     <Compile Include="Towers\Factories\CannonTowerFactory.cs" />

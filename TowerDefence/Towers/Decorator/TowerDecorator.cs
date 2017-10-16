@@ -1,18 +1,15 @@
-﻿namespace TowerDefence.Towers.Decorators {
-    public class TowerDecorator : AbstractTower {
+﻿namespace TowerDefence.Towers.Decorator {
+    public abstract class TowerDecorator : AbstractTower {
         protected readonly AbstractTower _tower;
-        public string Name { get; set; }
-        public int Damage { get; set; }
-        public int Range { get; set; }
 
-        public TowerDecorator(AbstractTower tower) : base(null){
+        protected TowerDecorator(AbstractTower tower) : base(null){
             _tower = tower;
             Name = tower.Name;
             Damage = tower.Damage;
             Range = tower.Range;
         }
         
-        public virtual void Attack() {
+        public override void Attack() {
             _tower.Attack();
         }
     }

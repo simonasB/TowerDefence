@@ -9,9 +9,9 @@ namespace TowerDefence.Towers
         public int Range { get; set;}
         protected IAttack AttackType;
 
-        protected AbstractTower(IAttack AttackType)
+        protected AbstractTower(IAttack attackType)
         {
-            this.AttackType = AttackType;
+            this.AttackType = attackType;
         }
 
         public virtual void Attack()

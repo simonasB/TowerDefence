@@ -1,6 +1,10 @@
-﻿namespace TowerDefence.Database.Entities {
+﻿using System;
+using LiteDB;
+
+namespace TowerDefence.Database.Entities {
     public class GameInfo {
-        public string Id { get; set; }
+        [BsonId]
+        public Guid Id { get; set; }
         public string PlayerName { get; set; }
     }
 }
