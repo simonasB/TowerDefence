@@ -14,6 +14,7 @@ using TowerDefence.Wave.LevelProducers;
 using TowerDefence.Wave;
 using TowerDefence.Towers.Attack;
 using TowerDefence.Towers.Decorator;
+using TowerDefence.Towers.Commands;
 
 namespace TowerDefence {
     public class Program {
@@ -74,7 +75,11 @@ namespace TowerDefence {
 
             // Bridge
 
-            // Any other
+            // Command
+            ICommand command = new CommandAttack(tower);
+            Logger.Instance().Info("Command pattern start");
+            command.execute();
+            Logger.Instance().Info("Command pattern end");
         }
 
         private static void SaveGameInfo(IDatabaseAdapter databaseAdapter) {           

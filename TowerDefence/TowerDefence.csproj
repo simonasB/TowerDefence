@@ -70,6 +70,8 @@
     <Compile Include="Towers\Attack\HardAttack.cs" />
     <Compile Include="Towers\Attack\IAttack.cs" />
     <Compile Include="Towers\Attack\MediumAttack.cs" />
+    <Compile Include="Towers\Commands\CommandAttack.cs" />
+    <Compile Include="Towers\Commands\ICommand.cs" />
     <Compile Include="Towers\Decorator\KilledMinionsTowerDecorator.cs" />
     <Compile Include="Towers\Decorator\MissedAttacksTowerDecorator.cs" />
     <Compile Include="Towers\Decorator\TowerDecorator.cs" />
