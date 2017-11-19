@@ -1,14 +1,14 @@
 ﻿namespace TowerDefence.Minions.Demons {
     public class DemonFactory : IMinionFactory {
-        public IMinion CreateStrongMinion() {
+        public Minion CreateStrongMinion() {
             return new StrongDemon();
         }
 
-        public IMinion CreateIntermediateMinion() {
+        public Minion CreateIntermediateMinion() {
             return new IntermediateDemon();
         }
 
-        public IMinion CreateWeakMinion() {
+        public Minion CreateWeakMinion() {
             return new WeakDemon();
         }
     }

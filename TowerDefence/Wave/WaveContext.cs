@@ -4,7 +4,7 @@ namespace TowerDefence.Wave
 {
     public class WaveContext
     {
-        private IWaveProducer _waveProducer;
+        private readonly IWaveProducer _waveProducer;
 
         public WaveContext(IWaveProducer waveProducer)
         {

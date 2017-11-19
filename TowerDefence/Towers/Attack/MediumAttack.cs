@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TowerDefence.Towers.Attack
 {
+    [Serializable]
     public class MediumAttack : IAttack
     {
         public float Impact { get; } = 0.4f;

@@ -1,4 +1,7 @@
-﻿namespace TowerDefence.Towers.Decorator
+﻿using System.Drawing;
+using TowerDefence.Bullets;
+
+namespace TowerDefence.Towers.Decorator
 {
     public class MissedAttacksTowerDecorator : TowerDecorator {
         private const int DecreasedDamage = 5;
@@ -14,6 +17,14 @@
                 .Info(
                     $"Tower missed 15 attacks in a row. Decreasing their damage by {DecreasedDamage}");
             Logger.Instance().Info("Tower border color blue");
+        }
+
+        public override void DrawSelf(Graphics gfx, Pen pen) {
+            throw new System.NotImplementedException();
+        }
+
+        public override Bullet CreateBullet(PointF start, PointF target) {
+            throw new System.NotImplementedException();
         }
     }
 }

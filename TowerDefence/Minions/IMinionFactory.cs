@@ -1,7 +1,7 @@
 ﻿namespace TowerDefence.Minions {
     public interface IMinionFactory {
-        IMinion CreateStrongMinion();
-        IMinion CreateIntermediateMinion();
-        IMinion CreateWeakMinion();
+        Minion CreateStrongMinion();
+        Minion CreateIntermediateMinion();
+        Minion CreateWeakMinion();
     }
 }

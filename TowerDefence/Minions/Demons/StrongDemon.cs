@@ -1,5 +1,5 @@
 ﻿namespace TowerDefence.Minions.Demons {
-    public class StrongDemon : IMinion {
+    public class StrongDemon : Minion {
         public int Health { get; }
         public string Name { get; }
     }

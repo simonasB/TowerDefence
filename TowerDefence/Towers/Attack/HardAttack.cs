@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TowerDefence.Towers.Attack
 {
+    [Serializable]
     public class HardAttack : IAttack
     {
         public float Impact { get; } = 0.8f;

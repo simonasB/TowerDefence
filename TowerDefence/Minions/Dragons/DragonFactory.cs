@@ -1,15 +1,15 @@
 ﻿namespace TowerDefence.Minions.Dragons {
     public class DragonFactory : IMinionFactory {
-        public IMinion CreateStrongMinion() {
-            return new StrongDragon();
+        public Minion CreateStrongMinion() {
+            return new StrongDragon(0, 0, 0, null);
         }
 
-        public IMinion CreateIntermediateMinion() {
-            return new IntermediateDragon();
+        public Minion CreateIntermediateMinion() {
+            return new IntermediateDragon(0, 0, 0, null);
         }
 
-        public IMinion CreateWeakMinion() {
-            return new WeakDragon();
+        public Minion CreateWeakMinion() {
+            return new WeakDragon(0, 0, 0, null);
         }
     }
 }

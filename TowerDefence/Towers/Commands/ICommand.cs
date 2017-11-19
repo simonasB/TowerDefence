@@ -9,7 +9,7 @@
             this.TowerUnderCommand = towerUnderCommand;
         }
 
-        abstract public void execute();
+        public abstract void execute();
 
         public void undo() {
             // Undo stuff

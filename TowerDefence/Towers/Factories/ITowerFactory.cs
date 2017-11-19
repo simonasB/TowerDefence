@@ -4,6 +4,6 @@ namespace TowerDefence.Towers.Factories
 {
     public interface ITowerFactory
     {
-        AbstractTower CreateTower(IAttack AttackType);
+        AbstractTower CreateTower(IAttack attackType);
     }
 }

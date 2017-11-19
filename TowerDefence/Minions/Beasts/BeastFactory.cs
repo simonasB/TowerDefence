@@ -1,15 +1,15 @@
 ﻿namespace TowerDefence.Minions.Beasts {
     public class BeastFactory : IMinionFactory {
-        public IMinion CreateStrongMinion() {
-            return new StrongBeast();
+        public Minion CreateStrongMinion() {
+            return new StrongBeast(0, 0, 0, null);
         }
 
-        public IMinion CreateIntermediateMinion() {
-            return new IntermediateBeast();
+        public Minion CreateIntermediateMinion() {
+            return new IntermediateBeast(0, 0, 0, null);
         }
 
-        public IMinion CreateWeakMinion() {
-            return new WeakBeast();
+        public Minion CreateWeakMinion() {
+            return new WeakBeast(0, 0, 0, null);
         }
     }
 }

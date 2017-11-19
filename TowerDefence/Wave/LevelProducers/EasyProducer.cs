@@ -17,7 +17,7 @@ namespace TowerDefence.Wave.LevelProducers
         }
         public Wave Produce()
         {
-            var minions = new List<IMinion>();
+            var minions = new List<Minion>();
 
             var beastFactory = _minionFactoryProvider.GetFactory(nameof(BeastFactory));
 
