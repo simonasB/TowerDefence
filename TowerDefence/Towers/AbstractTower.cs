@@ -97,19 +97,6 @@ namespace TowerDefence.Towers
         }
 
         public override void DrawSelf(Graphics gfx, Pen pen) {
-
-
-            if (!CanBuy && Dummy) {
-                PointF a = new PointF(Center.X - (Width / 2), Center.Y - Height / 2);
-                PointF b = new PointF(Center.X + Width / 2, Center.Y - Height / 2);
-                PointF c = new PointF(Center.X + Width / 2, Center.Y + Height / 2);
-                PointF d = new PointF(Center.X - Width / 2, Center.Y + Height / 2);
-
-                gfx.FillPolygon(Brushes.Yellow, new PointF[5] {a, b, c, d, a});
-
-
-            }
-
             if (InvalidPosisiton) {
                 PointF a = new PointF(Center.X - (Width / 2), Center.Y - Height / 2);
                 PointF b = new PointF(Center.X + Width / 2, Center.Y - Height / 2);

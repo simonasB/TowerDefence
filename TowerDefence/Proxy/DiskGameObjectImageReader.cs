@@ -8,7 +8,7 @@ namespace TowerDefence.Proxy {
         public Dictionary<string, Image> GetGameObjectImages() {
             var map = new Dictionary<string, Image>();
 
-            foreach (var imageName in new [] {"archerTower.png", "beast.png", "canonTower.png", "dragon.png", "heavyBullet.png", "simpleBullet.png"}) {
+            foreach (var imageName in new [] {"archerTower.png", "beast.png", "cannonTower.png", "dragon.png", "heavyBullet.png", "simpleBullet.png"}) {
                 var image = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"pics/{imageName}"));
                 map.Add(imageName.Substring(0, imageName.Length - ".png".Length), image);
             }

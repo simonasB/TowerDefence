@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using TowerDefence.Bullets;
 using TowerDefence.Core;
+using TowerDefence.Flyweight;
 using TowerDefence.Minions;
 using TowerDefence.Towers.Attack;
 
@@ -15,6 +16,7 @@ namespace TowerDefence.Towers {
             Name = "Cannon tower";
             Damage = 20;
             Range = 1;
+            GameObjectType = GameObjectTypeFactory.GetGameObjectType("cannonTower");
         }
 
         public override Bullet Attack(List<Minion> enemies) {
@@ -25,17 +27,7 @@ namespace TowerDefence.Towers {
         public override void DrawSelf(Graphics gfx, Pen pen) {
             base.DrawSelf(gfx, pen);
 
-            PointF a = new PointF(Center.X + Width / 2, Center.Y);
-            PointF b = new PointF(Center.X - Width / 2, Center.Y + Height / 2);
-            PointF c = new PointF(Center.X - Width / 2, Center.Y - Height / 2);
-
-            PointF a1 = Calc.RotatePoint(Center, a, Angle);
-            PointF b1 = Calc.RotatePoint(Center, b, Angle);
-            PointF c1 = Calc.RotatePoint(Center, c, Angle);
-
-            Brush brush = Brushes.Blue;
-            gfx.FillPolygon(brush, new PointF[4] {a1, b1, c1, a1});
-            gfx.DrawPolygon(pen, new PointF[4] {a1, b1, c1, a1});
+            GameObjectType.Draw(gfx, (int)(Center.X - (Width / 2)), (int)(Center.Y), Width, Height);
 
             if (!Dummy) {
 

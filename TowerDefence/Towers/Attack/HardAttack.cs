@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using TowerDefence.Bullets;
 using TowerDefence.Core;
+using TowerDefence.Flyweight;
 using TowerDefence.Minions;
 
 namespace TowerDefence.Towers.Attack
@@ -29,7 +30,10 @@ namespace TowerDefence.Towers.Attack
         }
 
         protected override Bullet CreateBullet(PointF start, PointF target) {
-            return new HeavyBullet(start, target) {TargetType = TargetType.Ground};
+            return new HeavyBullet(start, target) {
+                TargetType = TargetType.Ground,
+                GameObjectType = GameObjectTypeFactory.GetGameObjectType("heavyBullet")
+            };
         }
     }
 }

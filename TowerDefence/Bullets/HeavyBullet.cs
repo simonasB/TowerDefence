@@ -26,9 +26,11 @@ namespace TowerDefence.Bullets {
 
         public override void DrawSelf(Graphics gfx, Pen pen) {
             if (Center == Target) {
-                gfx.FillEllipse(Brushes.Gainsboro, Center.X - (Width / 2), Center.Y - Height / 2, Width, Height);
+                //gfx.FillEllipse(Brushes.Gainsboro, Center.X - (Width / 2), Center.Y - Height / 2, Width, Height);
+                GameObjectType.Draw(gfx, (int)(Center.X - (Width / 2)), (int)(Center.Y - Height / 2), Width, Height);
             } else {
-                gfx.FillEllipse(Brushes.Black, Center.X - 2, Center.Y - 2, 4, 4);
+                //gfx.FillEllipse(Brushes.Black, Center.X - 2, Center.Y - 2, 4, 4);
+                GameObjectType.Draw(gfx, (int)(Center.X - 2), (int)(Center.Y - 2), 4, 4);
             }
         }
     }

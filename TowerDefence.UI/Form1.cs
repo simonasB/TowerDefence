@@ -4,12 +4,9 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using TowerDefence.Common;
 using TowerDefence.Core;
-using TowerDefence.Database;
-using TowerDefence.Database.RavenDb;
 using TowerDefence.Minions;
 using TowerDefence.Towers;
 using TowerDefence.Towers.Attack;
@@ -94,7 +91,7 @@ namespace TowerDefence.UI
 
             _game.Towers.Add(archerTowerToBuy);
 
-            var image = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pics/tower_archer.png"));
+            //var image = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pics/tower_archer.png"));
 
             var activeArcherTower = archerTowerFactory.CreateTower(new HardAttack());
             activeArcherTower.Center = new PointF(150, 80);

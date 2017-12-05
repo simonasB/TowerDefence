@@ -11,7 +11,7 @@ namespace TowerDefence.Common {
         }
 
         public void Draw(Graphics gfx, int x, int y, int width, int height) {
-            gfx.DrawImageUnscaled(_image, x, y, width, height);
+            gfx.DrawImageUnscaled(new Bitmap(_image, new Size(width, height)), x, y, width, height);
         }
     }
 }
