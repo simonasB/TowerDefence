@@ -10,7 +10,7 @@ namespace TowerDefence.Towers {
     [Serializable]
     public class CannonTower : AbstractTower {
 
-        public CannonTower(IAttack AttackType) : base(AttackType)
+        public CannonTower(BaseAttack AttackType) : base(AttackType)
         {
             Name = "Cannon tower";
             Damage = 20;
@@ -43,7 +43,7 @@ namespace TowerDefence.Towers {
                 gfx.DrawEllipse(penn, Center.X - Range, Center.Y - Range, Range * 2, Range * 2);
             }
             if (Dummy) {
-                gfx.DrawString((1000 / FireDelayMilis * TeslaBullet.DamageDefault).ToString(), new Font("Arial", 7),
+                gfx.DrawString((1000 / FireDelayMilis * SimpleBullet.DamageDefault).ToString(), new Font("Arial", 7),
                     Brushes.Black, Center.X - (Width / 2), Center.Y - 15);
             }
         }

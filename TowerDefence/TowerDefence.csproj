@@ -63,8 +63,8 @@
     <Compile Include="Bullets\Bullet.cs" />
     <Compile Include="Bullets\HeavyBullet.cs" />
     <Compile Include="Bullets\SimpleBullet.cs" />
-    <Compile Include="Bullets\SonicBullet.cs" />
-    <Compile Include="Bullets\TeslaBullet.cs" />
+    <Compile Include="Flyweight\GameObjectType.cs" />
+    <Compile Include="Flyweight\GameObjectTypeProvider.cs" />
     <Compile Include="Core\Calc.cs" />
     <Compile Include="Common\GameObject.cs" />
     <Compile Include="Common\IFactoryProvider.cs" />
@@ -80,9 +80,13 @@
     <Compile Include="Core\Game.cs" />
     <Compile Include="Core\GameLevel.cs" />
     <Compile Include="Core\Map.cs" />
+    <Compile Include="Flyweight\GameObjectTypeFactory.cs" />
+    <Compile Include="Proxy\DiskGameObjectImageReader.cs" />
+    <Compile Include="Proxy\GameObjectImageCacheProxy.cs" />
+    <Compile Include="Proxy\IGameObjectImageReader.cs" />
     <Compile Include="Towers\Attack\EasyAttack.cs" />
     <Compile Include="Towers\Attack\HardAttack.cs" />
-    <Compile Include="Towers\Attack\IAttack.cs" />
+    <Compile Include="Towers\Attack\BaseAttack.cs" />
     <Compile Include="Towers\Attack\MediumAttack.cs" />
     <Compile Include="Towers\Decorator\KilledMinionsTowerDecorator.cs" />
     <Compile Include="Towers\Decorator\MissedAttacksTowerDecorator.cs" />

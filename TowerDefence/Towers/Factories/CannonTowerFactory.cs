@@ -5,9 +5,9 @@ namespace TowerDefence.Towers.Factories
 {
     public class CannonTowerFactory : ITowerFactory
     {
-        public AbstractTower CreateTower(IAttack attackType)
+        public AbstractTower CreateTower(BaseAttack baseAttackType)
         {
-            return new CannonTower(attackType) {
+            return new CannonTower(baseAttackType) {
                 Price = 50,
                 Range = 120,
                 TargetType = TargetType.All,

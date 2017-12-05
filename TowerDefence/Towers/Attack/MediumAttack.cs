@@ -7,10 +7,19 @@ using TowerDefence.Minions;
 namespace TowerDefence.Towers.Attack
 {
     [Serializable]
-    public class MediumAttack : IAttack
+    public class MediumAttack : BaseAttack
     {
         public float Impact { get; } = 0.4f;
-        public Bullet Attack(List<Minion> enemies, PointF center, int range) {
+
+        protected override List<Minion> FindTargets(List<Minion> enemies, PointF center, int range) {
+            throw new NotImplementedException();
+        }
+
+        protected override Minion SelectTarget(List<Minion> enemies) {
+            throw new NotImplementedException();
+        }
+
+        protected override Bullet CreateBullet(PointF start, PointF target) {
             throw new NotImplementedException();
         }
 

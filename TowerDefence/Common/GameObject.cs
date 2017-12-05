@@ -9,6 +9,8 @@ namespace TowerDefence.Common {
         public int Height { get; set; }
         public double Angle { get; set; }
 
+        public GameObjectType GameObjectType { get; set; }
+
         public abstract void DrawSelf(Graphics gfx, Pen pen);
     }
 }

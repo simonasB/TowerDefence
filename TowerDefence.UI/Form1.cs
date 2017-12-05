@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -93,11 +94,14 @@ namespace TowerDefence.UI
 
             _game.Towers.Add(archerTowerToBuy);
 
+            var image = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pics/tower_archer.png"));
+
             var activeArcherTower = archerTowerFactory.CreateTower(new HardAttack());
             activeArcherTower.Center = new PointF(150, 80);
             activeArcherTower.Active = true;
             activeArcherTower.Dummy = false;
             activeArcherTower.Placed = true;
+            activeArcherTower.Image = new Bitmap(image, new Size(activeArcherTower.Width, activeArcherTower.Height));
 
             _game.Towers.Add(activeArcherTower);
 
@@ -113,6 +117,7 @@ namespace TowerDefence.UI
             activeCannonTower.Active = true;
             activeCannonTower.Dummy = false;
             activeCannonTower.Placed = true;
+            activeCannonTower.Image = new Bitmap(image, new Size(activeCannonTower.Width, activeCannonTower.Height)); ;
 
             _game.Towers.Add(activeCannonTower);
 

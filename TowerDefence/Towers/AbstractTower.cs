@@ -15,7 +15,7 @@ namespace TowerDefence.Towers
         public string Name { get; set; }
         public int Damage { get; set; }
         public int Range { get; set;}
-        public IAttack AttackType { get; set; }
+        public BaseAttack AttackType { get; set; }
 
         #region StaticDefence
 
@@ -33,7 +33,7 @@ namespace TowerDefence.Towers
 
         #endregion
 
-        protected AbstractTower(IAttack attackType)
+        protected AbstractTower(BaseAttack attackType)
         {
             LastFiredMilis = DateTime.MinValue;
             Angle = Calc.DegreeToRadian(0);

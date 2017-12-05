@@ -5,7 +5,7 @@ namespace TowerDefence.Towers.Factories
 {
     public class ArcherTowerFactory : ITowerFactory
     {
-        public AbstractTower CreateTower(IAttack attackType)
+        public AbstractTower CreateTower(BaseAttack attackType)
         {
             return new ArcherTower(attackType) {
                 Price = 10,

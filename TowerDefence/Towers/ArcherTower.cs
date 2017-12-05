@@ -9,7 +9,7 @@ using TowerDefence.Towers.Attack;
 namespace TowerDefence.Towers {
     [Serializable]
     public class ArcherTower : AbstractTower { 
-        public ArcherTower(IAttack attackType) : base(attackType)
+        public ArcherTower(BaseAttack attackType) : base(attackType)
         {
             Name = "Archer tower";
             Damage = 10;
@@ -18,7 +18,7 @@ namespace TowerDefence.Towers {
 
         public override Bullet Attack(List<Minion> enemies) {
             Console.WriteLine($"{nameof(ArcherTower)} starts attack");
-            return base.Attack(enemies);
+            return CanFire() ? base.Attack(enemies) : null;
         }
 
         public override void DrawSelf(Graphics gfx, Pen pen) {
@@ -44,7 +44,7 @@ namespace TowerDefence.Towers {
             }
             if (Dummy)
             {
-                gfx.DrawString((1000 / FireDelayMilis * TeslaBullet.DamageDefault).ToString(), new Font("Arial", 7), Brushes.Black, Center.X - (Width / 2), Center.Y - 15);
+                gfx.DrawString((1000 / FireDelayMilis * SimpleBullet.DamageDefault).ToString(), new Font("Arial", 7), Brushes.Black, Center.X - (Width / 2), Center.Y - 15);
             }
         }
     }
