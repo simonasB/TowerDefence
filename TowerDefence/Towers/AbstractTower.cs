@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using TowerDefence.Bullets;
 using TowerDefence.Common;
 using TowerDefence.Core;
@@ -11,19 +10,21 @@ using TowerDefence.Towers.Attack;
 namespace TowerDefence.Towers
 {
     [Serializable]
-    public abstract class AbstractTower : GameObject
+    public abstract class AbstractTower : GameObject, ICloneable
     {
         public string Name { get; set; }
         public int Damage { get; set; }
         public int Range { get; set;}
-        protected IAttack AttackType;
+        public IAttack AttackType { get; set; }
 
         #region StaticDefence
 
         public decimal Price { get; set; }
         public bool CanBuy { get; set; }
+        // If shooting
         public bool Active { get; set; }
         public bool Placed { get; set; }
+        // For buying
         public bool Dummy { get; set; }
         public bool InvalidPosisiton { get; set; }
         public int FireDelayMilis { get; set; }
@@ -44,49 +45,22 @@ namespace TowerDefence.Towers
             this.AttackType = attackType;
         }
 
-        public virtual void Attack()
-        {
-            AttackType.Attack();
-        }
+        public virtual Bullet Attack(List<Minion> enemies) {
+            var bullet = AttackType.Attack(enemies, Center, Range);
+            LastFiredMilis = DateTime.Now;
 
-        public abstract Bullet CreateBullet(PointF start, PointF target);
-
-        public virtual Bullet Fire(Minion enemy)
-        {
-            if (enemy != null)
-            {
-                LastFiredMilis = DateTime.Now;
-                Bullet bullet = CreateBullet(Center, enemy.Center);
+            if (bullet != null) {
                 Angle = bullet.Angle;
-                return bullet;
             }
 
-            return null;
+            return bullet;
         }
 
-        public Minion FindTarget(List<Minion> enemies) {
-            if (!Active)
-                return null;
-
-            List<Minion> enemiesInRange = new List<Minion>();
-            foreach (var item in enemies) {
-                double dist = Calc.Distance(Center, item.Center);
-
-                if (Range >= dist)
-                    enemiesInRange.Add(item);
-            }
-
-            if (enemiesInRange.Count > 0)
-                return enemiesInRange.First();
-
-            return null;
-        }
-
-        public void EnableFire(bool enable) {
+        public virtual void EnableFire(bool enable) {
             Active = Placed = enable;
             Dummy = !enable;
         }
-        public bool CanBuyIt(decimal money)
+        public virtual bool CanBuyIt(decimal money)
         {
             return money - Price >= 0;
         }
@@ -94,29 +68,6 @@ namespace TowerDefence.Towers
         public bool CanFire()
         {
             return Active && Placed && !Dummy && Calc.TimePassed(FireDelayMilis, LastFiredMilis);
-        }
-
-        public virtual List<Bullet> TryFire(List<Minion> enemies) {
-            List<Bullet> bullets = new List<Bullet>();
-            if (CanFire()) {
-                Bullet bullet = TryFireOne(enemies);
-                if (bullet != null)
-                    bullets.Add(bullet);
-            }
-
-            return bullets;
-
-        }
-
-        public virtual Bullet TryFireOne(List<Minion> enemies) {
-            Bullet bullet = null;
-            if (CanFire()) {
-                Minion enemy = FindTarget(enemies);
-                if (enemy != null) {
-                    bullet = Fire(enemy);
-                }
-            }
-            return bullet;
         }
 
         public bool IsOverlapingRoads(Map map) {
@@ -174,6 +125,10 @@ namespace TowerDefence.Towers
                 //gfx.DrawString(Price.ToString(), new Font("Arial", 5), Brushes.Black, Center.X - (Width / 2), Center.Y - Height / 2 - 7);
 
             }
+        }
+
+        public object Clone() {
+            return MemberwiseClone();
         }
     }
 }

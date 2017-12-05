@@ -59,8 +59,9 @@ namespace TowerDefence.Minions {
 
         }
 
-        public void PositionEnemyForStart(Map map)
-        {
+        public void PositionEnemyForStart(Map map) {
+            this.Map = map;
+
             Road first = map.Roads.First();
             if (first.Direction == Direction.Right)
                 Center = new PointF(map.Start.X + 0.1F, map.Start.Y + map.RoadThickness / 2);

@@ -4,7 +4,7 @@ using TowerDefence.Minions;
 
 namespace TowerDefence.Bullets {
     public class HeavyBullet : Bullet {
-        public const int DamageDefault = 2;
+        public const int DamageDefault = 10;
 
         public int SlowPercent { get; set; }
         public int SlowDuration { get; set; }

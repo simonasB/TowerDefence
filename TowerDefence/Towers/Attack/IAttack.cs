@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using TowerDefence.Bullets;
+using TowerDefence.Minions;
 
 namespace TowerDefence.Towers.Attack
 {
@@ -10,6 +9,6 @@ namespace TowerDefence.Towers.Attack
     {
         float Impact { get; }
 
-        void Attack();
+        Bullet Attack(List<Minion> enemies, PointF center, int range);
     }
 }

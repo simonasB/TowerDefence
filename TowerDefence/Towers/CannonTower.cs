@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using TowerDefence.Bullets;
 using TowerDefence.Core;
+using TowerDefence.Minions;
 using TowerDefence.Towers.Attack;
 
 namespace TowerDefence.Towers {
@@ -15,13 +17,9 @@ namespace TowerDefence.Towers {
             Range = 1;
         }
 
-        public override void Attack() {
+        public override Bullet Attack(List<Minion> enemies) {
             Console.WriteLine($"{nameof(CannonTower)} starts attack");
-            AttackType.Attack();
-        }
-
-        public override Bullet CreateBullet(PointF start, PointF target) {
-            return new SonicBullet(start, target) { Range = 500, TargetType = TargetType.All };
+            return base.Attack(enemies);
         }
 
         public override void DrawSelf(Graphics gfx, Pen pen) {

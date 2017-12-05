@@ -14,7 +14,6 @@ using TowerDefence.Wave.LevelProducers;
 using TowerDefence.Wave;
 using TowerDefence.Towers.Attack;
 using TowerDefence.Towers.Decorator;
-using TowerDefence.Towers.Commands;
 
 namespace TowerDefence {
     public class Program {
@@ -35,11 +34,11 @@ namespace TowerDefence {
             Console.WriteLine(tower.Damage);
             Console.WriteLine(tower.Range);
 
-            tower.Attack();
+            tower.Attack(null);
             Console.WriteLine("Damage before: " + tower.Damage);
             MissedAttacksTowerDecorator missedAttacksTowerDecorator = new MissedAttacksTowerDecorator(tower);
             Console.WriteLine("Damage after: " + missedAttacksTowerDecorator.Damage);
-            missedAttacksTowerDecorator.Attack();
+            missedAttacksTowerDecorator.Attack(null);
 
             var factory = GetFactory<IMinionFactory>(nameof(BeastFactory));
 
@@ -61,10 +60,9 @@ namespace TowerDefence {
         }
 
         static void SecondPartPatternsDemo() {
-            // Decorator 
             var tower = new ArcherTower(new HardAttack());
             var killedMinionsDecorator = new KilledMinionsTowerDecorator(tower);
-            killedMinionsDecorator.Attack();
+            killedMinionsDecorator.Attack(null);
 
             // Adapter
             IDatabaseAdapter ravenDb = new RavenDbAdapter(DocumentStoreHolder.Store);
@@ -72,14 +70,6 @@ namespace TowerDefence {
 
             SaveGameInfo(ravenDb);
             SaveGameInfo(liteDb);
-
-            // Bridge
-
-            // Command
-            ICommand command = new CommandAttack(tower);
-            Logger.Instance().Info("Command pattern start");
-            command.execute();
-            Logger.Instance().Info("Command pattern end");
         }
 
         private static void SaveGameInfo(IDatabaseAdapter databaseAdapter) {           

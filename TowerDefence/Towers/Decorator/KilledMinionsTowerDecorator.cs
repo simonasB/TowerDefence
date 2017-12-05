@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using TowerDefence.Bullets;
 
 namespace TowerDefence.Towers.Decorator
 {
@@ -20,10 +19,9 @@ namespace TowerDefence.Towers.Decorator
 
         public override void DrawSelf(Graphics gfx, Pen pen) {
             base._tower.DrawSelf(gfx, pen);
-        }
 
-        public override Bullet CreateBullet(PointF start, PointF target) {
-            return base._tower.CreateBullet(start, target);
+            gfx.DrawString("D", new Font("Arial", 5), Brushes.Black, Center.X - (Width / 2),
+                Center.Y + Height / 2 + 7);
         }
     }
 }

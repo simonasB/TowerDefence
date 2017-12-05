@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using TowerDefence.Bullets;
+using TowerDefence.Database.Entities;
 using TowerDefence.Minions;
 using TowerDefence.Towers;
+using TowerDefence.Towers.Decorator;
 
 namespace TowerDefence.Core {
     public class Game {
@@ -26,6 +28,11 @@ namespace TowerDefence.Core {
 
         public AbstractTower SelectedTower { get; set; }
 
+        public List<GameInfo> GameInfos { get; set; }
+
+        private int _currentLevel = 1;
+        private int _destroyedEnemies = 0;
+        private bool _decorated;
         protected bool Updating { get; set; }
 
         public Game(int nextWaveCounterSec) {
@@ -43,6 +50,7 @@ namespace TowerDefence.Core {
             Towers = new List<AbstractTower>();
             TowersToAdd = new List<AbstractTower>();
             Levels = new List<GameLevel>();
+            GameInfos = new List<GameInfo>();
         }
 
         public void Timer_Tick(object sender, EventArgs eArgs) {
@@ -55,7 +63,8 @@ namespace TowerDefence.Core {
             if (!Running && !force)
                 return;
 
-            if (NextLevelCounterSeconds == 0) {
+            if (NextLevelCounterSeconds == 0) {             
+                
                 SendNextLevel();
             }
 
@@ -76,6 +85,16 @@ namespace TowerDefence.Core {
                 }
 
                 Enemies.Remove(item);
+                _destroyedEnemies++;
+            }
+
+            if (_destroyedEnemies >= 5 && !_decorated) {
+                for (int i = 0; i < Towers.Count; i++) {
+                    if (Towers[i].Active) {
+                        Towers[i] = new KilledMinionsTowerDecorator(Towers[i]);
+                    }
+                }
+                _decorated = true;
             }
 
             foreach (var item in Enemies) {
@@ -83,7 +102,7 @@ namespace TowerDefence.Core {
             }
 
 
-            // add new bought towes
+            // add new bought towers
             foreach (var item in TowersToAdd) {
                 item.EnableFire(true);
                 Towers.Add(item);
@@ -96,9 +115,11 @@ namespace TowerDefence.Core {
                     item.CanBuy = item.CanBuyIt(Money);
                 } else {
                     if (item.CanFire()) {
-                        List<Bullet> bb = item.TryFire(Enemies);
+                        Bullet bb = item.Attack(Enemies);
 
-                        Bullets.AddRange(bb);
+                        if (bb != null) {
+                            Bullets.Add(bb);
+                        }
                     }
                 }
             }
@@ -117,10 +138,17 @@ namespace TowerDefence.Core {
         public void SendNextLevel() {
             //Level level = null;
             if (Levels.Any(x => !x.Active)) {
+                GameInfos.Add(new GameInfo {
+                    Level = _currentLevel,
+                    Life = Life,
+                    Money = Money,
+                    Points = Points
+                });
+
+                _currentLevel++;
                 Points = Points + NextLevelCounterSeconds;
                 Levels.First(x => !x.Active).Active = true;
                 NextLevelCounterSeconds = _designatedNextLevelCounterSeconds;
-
             }
         }
 

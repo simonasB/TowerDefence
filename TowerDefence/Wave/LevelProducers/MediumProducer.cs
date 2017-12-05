@@ -1,6 +1,8 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using TowerDefence.Common;
 using TowerDefence.Minions;
+using TowerDefence.Minions.Beasts;
+using TowerDefence.Minions.Dragons;
 
 namespace TowerDefence.Wave.LevelProducers
 {
@@ -13,9 +15,19 @@ namespace TowerDefence.Wave.LevelProducers
             _minionFactoryProvider = minionFactoryProvider;
         }
 
-        public Wave Produce()
-        {
-            throw new NotImplementedException();
+        public Wave Produce() {
+            var minions = new Stack<Minion>();
+
+            var beastFactory = _minionFactoryProvider.GetFactory(nameof(BeastFactory));
+            var dragonFactory = _minionFactoryProvider.GetFactory(nameof(DragonFactory));
+
+            minions.Push(beastFactory.CreateWeakMinion());
+            minions.Push(beastFactory.CreateStrongMinion());
+            minions.Push(dragonFactory.CreateStrongMinion());
+
+            return new Wave {
+                Minions = minions
+            };
         }
     }
 }

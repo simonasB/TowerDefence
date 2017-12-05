@@ -5,17 +5,22 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using TowerDefence.Common;
 using TowerDefence.Core;
+using TowerDefence.Database;
+using TowerDefence.Database.RavenDb;
+using TowerDefence.Minions;
 using TowerDefence.Towers;
 using TowerDefence.Towers.Attack;
 using TowerDefence.Towers.Factories;
+using TowerDefence.Wave;
+using TowerDefence.Wave.LevelProducers;
 
 namespace TowerDefence.UI
 {
     public partial class Form1 : Form
     {
         private Game _game;
-        private Thread _gameThread;
         private bool running = true;
         private Pen _myPen;
         public Form1()
@@ -41,43 +46,28 @@ namespace TowerDefence.UI
 
             GameLevel level = new GameLevel() {
                 Count = 10,
-                Money = 5,
-                Speed = 0.6F,
-                Points = 1,
                 SpawnDelayMilis = 1000,
-                Width = 10,
-                Height = 10,
-                HitPoints = 40,
-                Ground = true,
-                Active = true
+                Active = true,
+                Level = 1,
+                WaveContext = new WaveContext(new HardProducer(new ReflectionFactoryProvider<IMinionFactory>()))
             };
 
             _game.Levels.Add(level);
             level = new GameLevel() {
                 Count = 10,
-                Money = 10,
-                Speed = 0.6F,
-                Points = 1,
                 SpawnDelayMilis = 1500,
-                Width = 10,
-                Height = 10,
-                HitPoints = 40,
-                Ground = true,
-                Active = false
+                Active = false,
+                Level = 2,
+                WaveContext = new WaveContext(new HardProducer(new ReflectionFactoryProvider<IMinionFactory>()))
             };
 
             _game.Levels.Add(level);
             level = new GameLevel() {
                 Count = 10,
-                Money = 5,
-                Speed = 0.5F,
-                Points = 1,
                 SpawnDelayMilis = 1000,
-                Width = 10,
-                Height = 10,
-                HitPoints = 60,
-                Ground = true,
-                Active = false
+                Active = false,
+                Level = 3,
+                WaveContext = new WaveContext(new HardProducer(new ReflectionFactoryProvider<IMinionFactory>()))
             };
             _game.Levels.Add(level);
 
@@ -96,31 +86,33 @@ namespace TowerDefence.UI
             var archerTowerFactory = Utils.GetFactory<ITowerFactory>(nameof(ArcherTowerFactory));
             var cannonTowerFactory = Utils.GetFactory<ITowerFactory>(nameof(CannonTowerFactory));
 
-            var archerTowerToBuy = archerTowerFactory.CreateTower(new EasyAttack());
+            var archerTowerToBuy = archerTowerFactory.CreateTower(new HardAttack());
             archerTowerToBuy.Center = new PointF(200, 300);
             archerTowerToBuy.Active = false;
             archerTowerToBuy.Dummy = true;
 
             _game.Towers.Add(archerTowerToBuy);
 
-            var activeArcherTower = archerTowerFactory.CreateTower(new EasyAttack());
+            var activeArcherTower = archerTowerFactory.CreateTower(new HardAttack());
             activeArcherTower.Center = new PointF(150, 80);
             activeArcherTower.Active = true;
             activeArcherTower.Dummy = false;
+            activeArcherTower.Placed = true;
 
             _game.Towers.Add(activeArcherTower);
 
-            var cannonTowerToBuy = cannonTowerFactory.CreateTower(new EasyAttack());
+            var cannonTowerToBuy = cannonTowerFactory.CreateTower(new HardAttack());
             cannonTowerToBuy.Center = new PointF(250, 300);
             cannonTowerToBuy.Active = false;
             cannonTowerToBuy.Dummy = true;
 
             _game.Towers.Add(cannonTowerToBuy);
 
-            var activeCannonTower = cannonTowerFactory.CreateTower(new EasyAttack());
+            var activeCannonTower = cannonTowerFactory.CreateTower(new HardAttack());
             activeCannonTower.Center = new PointF(150, 120);
             activeCannonTower.Active = true;
             activeCannonTower.Dummy = false;
+            activeCannonTower.Placed = true;
 
             _game.Towers.Add(activeCannonTower);
 
@@ -134,14 +126,6 @@ namespace TowerDefence.UI
                 this.Refresh();
                 this.ResumeLayout(false);
             }
-        }
-
-        public void Updating() {
-            while (_game.Running) {
-                _game.Update(false);
-
-            }
-            _gameThread.Join();
         }
 
         protected override void OnClosing(CancelEventArgs e) {
@@ -180,7 +164,8 @@ namespace TowerDefence.UI
                 x.Dummy && (float) e.X > x.Center.X - x.Width / 2 && e.X < x.Center.X + x.Width / 2 &&
                 e.Y > x.Center.Y - Height / 2 && e.Y < x.Center.Y + Height / 2).ToList();
             if (towers.Count > 0 && towers.First().CanBuyIt(_game.Money)) {
-                AbstractTower copy = Utils.ObjectCopier.Clone<AbstractTower>(towers.First());
+                //AbstractTower copy = Utils.ObjectCopier.Clone<AbstractTower>(towers.First());
+                AbstractTower copy = (AbstractTower)towers.First().Clone();
                 copy.EnableFire(false);
                 _game.SelectedTower = copy;
             }

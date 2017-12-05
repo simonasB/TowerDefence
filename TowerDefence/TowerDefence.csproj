@@ -79,14 +79,11 @@
     <Compile Include="Database\LiteDBAdapter.cs" />
     <Compile Include="Core\Game.cs" />
     <Compile Include="Core\GameLevel.cs" />
-    <Compile Include="Level.cs" />
     <Compile Include="Core\Map.cs" />
     <Compile Include="Towers\Attack\EasyAttack.cs" />
     <Compile Include="Towers\Attack\HardAttack.cs" />
     <Compile Include="Towers\Attack\IAttack.cs" />
     <Compile Include="Towers\Attack\MediumAttack.cs" />
-    <Compile Include="Towers\Commands\CommandAttack.cs" />
-    <Compile Include="Towers\Commands\ICommand.cs" />
     <Compile Include="Towers\Decorator\KilledMinionsTowerDecorator.cs" />
     <Compile Include="Towers\Decorator\MissedAttacksTowerDecorator.cs" />
     <Compile Include="Towers\Decorator\TowerDecorator.cs" />
@@ -127,6 +124,8 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Notes.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,22 +1,21 @@
 ﻿using System;
 using TowerDefence.Minions;
-using TowerDefence.Minions.Beasts;
 using TowerDefence.Minions.Dragons;
+using TowerDefence.Wave;
 
 namespace TowerDefence.Core {
     public class GameLevel {
-        public int HitPoints { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
         // Minion spawning interval
         public int SpawnDelayMilis { get; set; }
         // How many times to spawn minion
         public int Count { get; set; }
-        public bool Ground { get; set; }
-        public decimal Money { get; set; }
-        public float Speed { get; set; }
-        public int Points { get; set; }
         public bool Active { get; set; }
+
+        public int Level { get; set; }
+
+        public WaveContext WaveContext { get; set; }
+
+        private Wave.Wave _wave;
 
         public DateTime LastTimeSpawn { get; set; }
 
@@ -27,14 +26,15 @@ namespace TowerDefence.Core {
 
         public Minion SpawnOne(Map map)
         {
+            if (_wave == null || _wave.Minions.Count == 0) {
+                _wave = WaveContext.GetWave();
+            }
+
             LastTimeSpawn = DateTime.Now;
             Count--;
 
-            Minion enemy = null;
-            if (Ground)
-                enemy = new StrongDragon(Speed, HitPoints, 100, map) { Height = Height, Width = Width, Money = Money, Points = Points };
-            else
-                enemy = new StrongBeast(Speed, HitPoints, 100, map) { Height = Height, Width = Width, Money = Money, Points = Points };
+            var enemy = _wave.Minions.Pop();
+            //enemy = new StrongDragon(Speed, HitPoints, 100, map) { Height = Height, Width = Width, Money = Money, Points = Points };
 
             enemy.PositionEnemyForStart(map);
 

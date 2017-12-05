@@ -22,9 +22,5 @@ namespace TowerDefence.Towers.Decorator
         public override void DrawSelf(Graphics gfx, Pen pen) {
             throw new System.NotImplementedException();
         }
-
-        public override Bullet CreateBullet(PointF start, PointF target) {
-            throw new System.NotImplementedException();
-        }
     }
 }

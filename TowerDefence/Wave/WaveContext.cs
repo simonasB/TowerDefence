@@ -15,6 +15,5 @@ namespace TowerDefence.Wave
         {
             return _waveProducer.Produce();
         }
-
     }
 }

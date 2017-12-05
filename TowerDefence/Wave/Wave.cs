@@ -5,6 +5,6 @@ namespace TowerDefence.Wave
 {
     public class Wave
     {
-        public List<Minion> Minions { get; set; }
+        public Stack<Minion> Minions { get; set; }
     }
 }

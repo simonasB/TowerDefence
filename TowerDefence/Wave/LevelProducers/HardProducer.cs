@@ -15,16 +15,16 @@ namespace TowerDefence.Wave.LevelProducers
             _minionFactoryProvider = minionFactoryProvider;
         }
         public Wave Produce() {
-            var minions = new List<Minion>();
+            var minions = new Stack<Minion>();
 
             var beastFactory = _minionFactoryProvider.GetFactory(nameof(BeastFactory));
             var dragonFactory = _minionFactoryProvider.GetFactory(nameof(DragonFactory));
 
-            minions.Add(beastFactory.CreateStrongMinion());
-            minions.Add(beastFactory.CreateStrongMinion());
+            minions.Push(beastFactory.CreateStrongMinion());
+            minions.Push(beastFactory.CreateStrongMinion());
 
-            minions.Add(dragonFactory.CreateStrongMinion());
-            minions.Add(dragonFactory.CreateIntermediateMinion());
+            minions.Push(dragonFactory.CreateStrongMinion());
+            minions.Push(dragonFactory.CreateIntermediateMinion());
 
             return new Wave {
                 Minions = minions
