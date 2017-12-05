@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TowerDefence
+{
+    class FatalLogger : AbstractLogger
+    {
+        public FatalLogger()
+        {
+            _level = LogLevel.FATAL;
+        }
+
+        protected override void Write(string message)
+        {
+            Logger.Instance().GetLogger().Fatal(message);
+        }
+    }
+}

@@ -18,13 +18,28 @@ using TowerDefence.Towers.Decorator;
 namespace TowerDefence {
     public class Program {
         public static void Main(string[] args) {
-            SecondPartPatternsDemo();
+            //SecondPartPatternsDemo();
+            LoggerChainTest();
 
             Console.ReadLine();
         }
 
+        static void LoggerChainTest()
+        {
+            Console.WriteLine("Starting chained logger test");
+            Console.WriteLine();
+
+            Logger.Instance().Log(LogLevel.INFO, "Testing info message");
+            Logger.Instance().Log(LogLevel.DEBUG, "Testing debug message");
+            Logger.Instance().Log(LogLevel.ERROR, "Testing error message");
+            Logger.Instance().Log(LogLevel.FATAL, "Testing fatal message");
+
+            Console.WriteLine();
+            Console.WriteLine("Chained logging test completed");
+        }
+
         static void FirstPartPatternsDemo() {
-            Logger.Instance().Info("Test logging");
+            Logger.Instance().Log(LogLevel.INFO, "Test logging");
 
             ITowerFactory towerFactory = LoadFactory();
 
@@ -43,7 +58,7 @@ namespace TowerDefence {
             var factory = GetFactory<IMinionFactory>(nameof(BeastFactory));
 
             var minion = factory.CreateIntermediateMinion();
-            Logger.Instance().Info($"Health:{minion.Health}, Name: {minion.Name}");
+            Logger.Instance().Log(LogLevel.INFO, $"Health:{minion.Health}, Name: {minion.Name}");
 
             ReflectionFactoryProvider<IMinionFactory> reflectiveMinionFactory =
                 new ReflectionFactoryProvider<IMinionFactory>();
@@ -51,11 +66,11 @@ namespace TowerDefence {
             // Strategy pattern example using Wave
             WaveContext waveContext = new WaveContext(new HardProducer(reflectiveMinionFactory));
             var wave = waveContext.GetWave();
-            Logger.Instance().Info($"Wave minion count: {wave.Minions.Count}");
+            Logger.Instance().Log(LogLevel.INFO, $"Wave minion count: {wave.Minions.Count}");
 
             waveContext = new WaveContext(new EasyProducer(reflectiveMinionFactory));
             wave = waveContext.GetWave();
-            Logger.Instance().Info($"Wave minion count: {wave.Minions.Count}");
+            Logger.Instance().Log(LogLevel.INFO, $"Wave minion count: {wave.Minions.Count}");
             // End of strategy pattern example
         }
 
@@ -79,7 +94,7 @@ namespace TowerDefence {
 
             var gameInfo = databaseAdapter.Retrieve(playerName);
 
-            Logger.Instance().Info($"Database: {databaseAdapter.GetType().Name}, Id: {gameInfo.Id}, PlayerName: {gameInfo.PlayerName}");
+            Logger.Instance().Log(LogLevel.INFO, $"Database: {databaseAdapter.GetType().Name}, Id: {gameInfo.Id}, PlayerName: {gameInfo.PlayerName}");
         }
 
         static ITowerFactory LoadFactory()

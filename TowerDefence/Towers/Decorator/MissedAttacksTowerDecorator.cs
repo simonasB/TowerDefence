@@ -13,10 +13,9 @@ namespace TowerDefence.Towers.Decorator
 
         private void WeakenTower() {
             Range = _tower.Range + DecreasedDamage;
-            Logger.Instance()
-                .Info(
+            Logger.Instance().Log(LogLevel.INFO,
                     $"Tower missed 15 attacks in a row. Decreasing their damage by {DecreasedDamage}");
-            Logger.Instance().Info("Tower border color blue");
+            Logger.Instance().Log(LogLevel.INFO, "Tower border color blue");
         }
 
         public override void DrawSelf(Graphics gfx, Pen pen) {

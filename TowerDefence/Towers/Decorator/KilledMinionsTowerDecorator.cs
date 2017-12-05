@@ -11,10 +11,9 @@ namespace TowerDefence.Towers.Decorator
 
         private void EnhanceTower() {
             Range = _tower.Range + IncreasedRange;
-            Logger.Instance()
-                .Info(
+            Logger.Instance().Log(LogLevel.INFO,
                     $"Towers killed 10 minions in a row. Enhancing their range by {IncreasedRange}");
-            Logger.Instance().Info("Tower border color red");
+            Logger.Instance().Log(LogLevel.INFO, "Tower border color red");
         }
 
         public override void DrawSelf(Graphics gfx, Pen pen) {

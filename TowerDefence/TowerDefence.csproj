@@ -60,9 +60,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logging\AbstractLogger.cs" />
     <Compile Include="Bullets\Bullet.cs" />
     <Compile Include="Bullets\HeavyBullet.cs" />
     <Compile Include="Bullets\SimpleBullet.cs" />
+    <Compile Include="Logging\DebugLogger.cs" />
+    <Compile Include="Logging\ErrorLogger.cs" />
+    <Compile Include="Logging\FatalLogger.cs" />
     <Compile Include="Flyweight\GameObjectType.cs" />
     <Compile Include="Flyweight\GameObjectTypeProvider.cs" />
     <Compile Include="Core\Calc.cs" />
@@ -81,6 +85,7 @@
     <Compile Include="Core\GameLevel.cs" />
     <Compile Include="Core\Map.cs" />
     <Compile Include="Flyweight\GameObjectTypeFactory.cs" />
+    <Compile Include="Logging\InfoLogger.cs" />
     <Compile Include="Proxy\DiskGameObjectImageReader.cs" />
     <Compile Include="Proxy\GameObjectImageCacheProxy.cs" />
     <Compile Include="Proxy\IGameObjectImageReader.cs" />
@@ -107,7 +112,7 @@
     <Compile Include="Towers\ArcherTower.cs" />
     <Compile Include="Towers\CannonTower.cs" />
     <Compile Include="Towers\AbstractTower.cs" />
-    <Compile Include="Logger.cs" />
+    <Compile Include="Logging\Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Vector.cs" />

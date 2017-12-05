@@ -10,6 +10,7 @@ namespace TowerDefence {
         private static volatile Logger _instance;
         private static readonly object _syncRoot = new object();
         private static ILog _logger;
+        private AbstractLogger _chainedLogger;
 
         private Logger() {
             if (_logger == null) {
@@ -20,6 +21,12 @@ namespace TowerDefence {
                 XmlConfigurator.Configure(logRepository, configFile);
 
                 _logger = LogManager.GetLogger(nameof(TowerDefence));
+
+                _chainedLogger = new FatalLogger();
+                _chainedLogger
+                    .SetNextLogger(new ErrorLogger())
+                    .SetNextLogger(new DebugLogger())
+                    .SetNextLogger(new InfoLogger());
             }
 
         }
@@ -36,30 +43,14 @@ namespace TowerDefence {
             return _instance;
         }
 
-
-        public void Fatal(Object message) {
-            _logger.Fatal(message);
+        public ILog GetLogger()
+        {
+            return _logger;
         }
 
-        public void Fatal(Object message, Exception exception) {
-            _logger.Fatal(message, exception);
-        }
-
-        public void Error(Object message) {
-            _logger.Error(message);
-        }
-
-        public void Error(Object message, Exception exception) {
-            _logger.Error(message, exception);
-
-        }
-
-        public void Debug(Object message) {
-            _logger.Debug(message);
-        }
-
-        public void Info(Object message) {
-            _logger.Info(message);
+        public void Log(LogLevel level, string message)
+        {
+            _chainedLogger.LogMessage(level, message);
         }
     }
 }
