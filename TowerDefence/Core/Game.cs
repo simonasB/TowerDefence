@@ -5,6 +5,7 @@ using System.Linq;
 using TowerDefence.Bullets;
 using TowerDefence.Database.Entities;
 using TowerDefence.Minions;
+using TowerDefence.State;
 using TowerDefence.Towers;
 using TowerDefence.Towers.Decorator;
 
@@ -33,11 +34,13 @@ namespace TowerDefence.Core {
         private int _currentLevel = 1;
         private int _destroyedEnemies = 0;
         private bool _decorated;
-        protected bool Updating { get; set; }
+        public GameState GameState { get; set; }
 
         public Game(int nextWaveCounterSec) {
             _designatedNextLevelCounterSeconds = nextWaveCounterSec;
             NextLevelCounterSeconds = nextWaveCounterSec;
+
+            GameState = new NotStartedState(this);
 
             Clock.Interval = 1000;
             Clock.Start();

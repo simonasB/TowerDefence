@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using TowerDefence.Common;
@@ -118,7 +117,7 @@ namespace TowerDefence.UI
 
             _game.Towers.Add(activeCannonTower);
 
-            _game.Running = true;
+            //_game.Running = true;
         }
 
         public void Timer_Tick(object sender, EventArgs eArgs) {
@@ -148,12 +147,6 @@ namespace TowerDefence.UI
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            _game.Running = !_game.Running;
-            button1.Text = _game.Running ? "Pause" : "Play";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -215,6 +208,19 @@ namespace TowerDefence.UI
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
 
+        }
+
+        private void start_Click(object sender, EventArgs e) {
+            labelState.Text = _game.GameState.OnStart();
+        }
+
+        private void pause_Click(object sender, EventArgs e) {
+            labelState.Text = _game.GameState.OnPause();
+        }
+
+        private void surrender_Click(object sender, EventArgs e) {
+            labelState.Text = _game.GameState.OnSurrender();
+            InitGame();
         }
     }
 }

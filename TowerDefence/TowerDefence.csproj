@@ -89,6 +89,11 @@
     <Compile Include="Proxy\DiskGameObjectImageReader.cs" />
     <Compile Include="Proxy\GameObjectImageCacheProxy.cs" />
     <Compile Include="Proxy\IGameObjectImageReader.cs" />
+    <Compile Include="State\GameOverState.cs" />
+    <Compile Include="State\GameState.cs" />
+    <Compile Include="State\NotStartedState.cs" />
+    <Compile Include="State\PausedState.cs" />
+    <Compile Include="State\RunningState.cs" />
     <Compile Include="Towers\Attack\EasyAttack.cs" />
     <Compile Include="Towers\Attack\HardAttack.cs" />
     <Compile Include="Towers\Attack\BaseAttack.cs" />
