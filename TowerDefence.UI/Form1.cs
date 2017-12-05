@@ -101,7 +101,7 @@ namespace TowerDefence.UI
             activeArcherTower.Active = true;
             activeArcherTower.Dummy = false;
             activeArcherTower.Placed = true;
-            activeArcherTower.Image = new Bitmap(image, new Size(activeArcherTower.Width, activeArcherTower.Height));
+            //activeArcherTower.Image = new Bitmap(image, new Size(activeArcherTower.Width, activeArcherTower.Height));
 
             _game.Towers.Add(activeArcherTower);
 
@@ -117,7 +117,7 @@ namespace TowerDefence.UI
             activeCannonTower.Active = true;
             activeCannonTower.Dummy = false;
             activeCannonTower.Placed = true;
-            activeCannonTower.Image = new Bitmap(image, new Size(activeCannonTower.Width, activeCannonTower.Height)); ;
+            //activeCannonTower.Image = new Bitmap(image, new Size(activeCannonTower.Width, activeCannonTower.Height)); ;
 
             _game.Towers.Add(activeCannonTower);
 
