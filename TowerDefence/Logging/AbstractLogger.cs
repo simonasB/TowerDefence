@@ -21,8 +21,7 @@ namespace TowerDefence
 
         public AbstractLogger SetNextLogger(AbstractLogger nextLogger)
         {
-            _nextLogger = nextLogger;
-            return nextLogger;
+            return _nextLogger = nextLogger;
         }
 
         public void LogMessage(LogLevel level, String message)
