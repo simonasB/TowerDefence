@@ -86,6 +86,9 @@
     <Compile Include="Core\Map.cs" />
     <Compile Include="Flyweight\GameObjectTypeFactory.cs" />
     <Compile Include="Logging\InfoLogger.cs" />
+    <Compile Include="Mediator\IMinionDamageControl.cs" />
+    <Compile Include="Mediator\MinionDamageControl.cs" />
+    <Compile Include="Mediator\MinionDamageControlManager.cs" />
     <Compile Include="Proxy\DiskGameObjectImageReader.cs" />
     <Compile Include="Proxy\GameObjectImageCacheProxy.cs" />
     <Compile Include="Proxy\IGameObjectImageReader.cs" />

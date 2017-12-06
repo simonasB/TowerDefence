@@ -3,9 +3,11 @@ using System.Drawing;
 using System.Linq;
 using TowerDefence.Common;
 using TowerDefence.Core;
+using TowerDefence.Mediator;
 
 namespace TowerDefence.Minions {
     public abstract class Minion : GameObject {
+        private readonly IMinionDamageControl _minionDamageControl;
         public int Health { get; set; }
         public string Name { get; set; }
 
@@ -32,8 +34,11 @@ namespace TowerDefence.Minions {
         public int SlowDuration { get; set; }
         protected bool _slowed;
 
-        protected Minion(float speed, int hitPoints, double moveDelayMilis, Map map)
+        public int LastReceivedDamage { get; set; }
+
+        protected Minion(float speed, int hitPoints, double moveDelayMilis, IMinionDamageControl minionDamageControl)
         {
+            _minionDamageControl = minionDamageControl;
             Speed = speed;
             HitPoints = hitPoints;
             MoveDelayMilis = moveDelayMilis;
@@ -51,12 +56,8 @@ namespace TowerDefence.Minions {
             _designatedSpeed = Speed;
             Destroy = false;
 
-            if (map != null)
-            {
-                Center = map.Start;
-            }
             EndReached = false;
-
+            minionDamageControl.RegisterMinionUnderGuidance(this);
         }
 
         public void PositionEnemyForStart(Map map) {
@@ -141,6 +142,8 @@ namespace TowerDefence.Minions {
         {
             Shooted = true;
             HitPoints = HitPoints - damage;
+            LastReceivedDamage = damage;
+            _minionDamageControl.ReceiveMinionLocation(this);
         }
 
     }

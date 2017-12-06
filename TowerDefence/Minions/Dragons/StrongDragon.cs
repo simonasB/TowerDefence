@@ -1,10 +1,13 @@
 ﻿using System.Drawing;
 using TowerDefence.Core;
 using TowerDefence.Flyweight;
+using TowerDefence.Mediator;
 
 namespace TowerDefence.Minions.Dragons {
     public class StrongDragon : Minion {
-        public StrongDragon(float speed, int hitPoints, double moveDelayMilis, Map map) : base(speed, hitPoints, moveDelayMilis, map) {
+        public StrongDragon(float speed, int hitPoints, double moveDelayMilis, IMinionDamageControl minionDamageControl = null) : base(speed, hitPoints, moveDelayMilis,
+        minionDamageControl ?? MinionDamageControlManager.MinionDamageControl)
+        {
             Health = 50;
             Name = nameof(StrongDragon);
             GameObjectType = GameObjectTypeFactory.GetGameObjectType("dragon");
