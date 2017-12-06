@@ -124,6 +124,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Vector.cs" />
+    <Compile Include="Visitor\IAcceptVisitorComponent.cs" />
+    <Compile Include="Visitor\IVisitor.cs" />
+    <Compile Include="Visitor\TowersAmountCalculatorVisitor.cs" />
     <Compile Include="Wave\LevelProducers\EasyProducer.cs" />
     <Compile Include="Wave\LevelProducers\HardProducer.cs" />
     <Compile Include="Wave\LevelProducers\IWaveProducer.cs" />

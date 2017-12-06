@@ -8,9 +8,10 @@ using TowerDefence.Minions;
 using TowerDefence.State;
 using TowerDefence.Towers;
 using TowerDefence.Towers.Decorator;
+using TowerDefence.Visitor;
 
 namespace TowerDefence.Core {
-    public class Game {
+    public class Game : IAcceptVisitorComponent{
         public bool Running { get; set; }
         public int Points { get; set; }
         public int Life { get; set; }
@@ -36,6 +37,10 @@ namespace TowerDefence.Core {
         private bool _decorated;
         public GameState GameState { get; set; }
 
+        public IVisitor AmountCalculatorVisitor { get; set; }
+        public int ArcherTowersAmount { get; set; }
+        public int CannonTowersAmount { get; set; }
+
         public Game(int nextWaveCounterSec) {
             _designatedNextLevelCounterSeconds = nextWaveCounterSec;
             NextLevelCounterSeconds = nextWaveCounterSec;
@@ -54,6 +59,10 @@ namespace TowerDefence.Core {
             TowersToAdd = new List<AbstractTower>();
             Levels = new List<GameLevel>();
             GameInfos = new List<GameInfo>();
+            AmountCalculatorVisitor = new TowersAmountCalculatorVisitor();
+
+            ArcherTowersAmount = 0;
+            CannonTowersAmount = 0;
         }
 
         public void Timer_Tick(object sender, EventArgs eArgs) {
@@ -62,7 +71,9 @@ namespace TowerDefence.Core {
             }
         }
 
-        public void Update(bool force) {
+        public void Update(bool force)
+        {
+            AmountCalculatorVisitor.TotalMoney = 0;
             if (!Running && !force)
                 return;
 
@@ -89,6 +100,24 @@ namespace TowerDefence.Core {
 
                 Enemies.Remove(item);
                 _destroyedEnemies++;
+            }
+
+            foreach (var enemy in Enemies)
+            {
+                enemy.Accept(AmountCalculatorVisitor);
+            }
+
+            foreach (var tower in Towers.Where(t => t.Dummy))
+            {
+                tower.Accept(AmountCalculatorVisitor);
+                if (tower.GetType() == typeof(ArcherTower))
+                {
+                    ArcherTowersAmount = AmountCalculatorVisitor.TowersAmount;
+                }
+                else
+                {
+                    CannonTowersAmount = AmountCalculatorVisitor.TowersAmount;
+                }
             }
 
             if (_destroyedEnemies >= 5 && !_decorated) {
@@ -177,6 +206,11 @@ namespace TowerDefence.Core {
             }
 
             SelectedTower?.DrawSelf(gfx, pen);
+        }
+
+        public void Accept(IVisitor visitor)
+        {
+            throw new NotImplementedException();
         }
     }
 }

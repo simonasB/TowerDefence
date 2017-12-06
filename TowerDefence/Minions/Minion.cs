@@ -4,9 +4,10 @@ using System.Linq;
 using TowerDefence.Common;
 using TowerDefence.Core;
 using TowerDefence.Mediator;
+using TowerDefence.Visitor;
 
 namespace TowerDefence.Minions {
-    public abstract class Minion : GameObject {
+    public abstract class Minion : GameObject, IAcceptVisitorComponent {
         private readonly IMinionDamageControl _minionDamageControl;
         public int Health { get; set; }
         public string Name { get; set; }
@@ -146,5 +147,9 @@ namespace TowerDefence.Minions {
             _minionDamageControl.ReceiveMinionLocation(this);
         }
 
+        public void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }

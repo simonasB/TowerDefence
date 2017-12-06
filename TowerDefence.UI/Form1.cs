@@ -142,6 +142,9 @@ namespace TowerDefence.UI
             lblMoney.Text = _game.Money.ToString();
             lblPoints.Text = _game.Points.ToString();
             lblNextWave.Text = _game.NextLevelCounterSeconds.ToString();
+            lblEnemiesAmount.Text = _game.AmountCalculatorVisitor.TotalMoney.ToString();
+            lblArcherTowersAmount.Text = _game.ArcherTowersAmount.ToString();
+            lblCanonTowersAmount.Text = _game.CannonTowersAmount.ToString();
         }
 
         private void Form1_Load(object sender, EventArgs e)

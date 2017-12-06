@@ -6,11 +6,12 @@ using TowerDefence.Common;
 using TowerDefence.Core;
 using TowerDefence.Minions;
 using TowerDefence.Towers.Attack;
+using TowerDefence.Visitor;
 
 namespace TowerDefence.Towers
 {
     [Serializable]
-    public abstract class AbstractTower : GameObject, ICloneable
+    public abstract class AbstractTower : GameObject, ICloneable, IAcceptVisitorComponent
     {
         public string Name { get; set; }
         public int Damage { get; set; }
@@ -116,6 +117,11 @@ namespace TowerDefence.Towers
 
         public object Clone() {
             return MemberwiseClone();
+        }
+
+        public void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }
