@@ -11,7 +11,7 @@ using TowerDefence.Towers.Decorator;
 using TowerDefence.Visitor;
 
 namespace TowerDefence.Core {
-    public class Game : IAcceptVisitorComponent{
+    public class Game {
         public bool Running { get; set; }
         public int Points { get; set; }
         public int Life { get; set; }
@@ -206,11 +206,6 @@ namespace TowerDefence.Core {
             }
 
             SelectedTower?.DrawSelf(gfx, pen);
-        }
-
-        public void Accept(IVisitor visitor)
-        {
-            throw new NotImplementedException();
         }
     }
 }
