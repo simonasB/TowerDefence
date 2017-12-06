@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using TowerDefence.Common;
 using TowerDefence.Core;
+using TowerDefence.Memento;
 using TowerDefence.Minions;
 using TowerDefence.Towers;
 using TowerDefence.Towers.Attack;
@@ -20,6 +21,9 @@ namespace TowerDefence.UI
         private Game _game;
         private bool running = true;
         private Pen _myPen;
+        private readonly CareTaker _careTaker = new CareTaker();
+        private Originator _originator;
+
         public Form1()
         {
             InitializeComponent();
@@ -118,6 +122,10 @@ namespace TowerDefence.UI
             _game.Towers.Add(activeCannonTower);
 
             //_game.Running = true;
+
+            _originator = new Originator(_game);
+            var state = _originator.SaveState();
+            _careTaker.Add(state);
         }
 
         public void Timer_Tick(object sender, EventArgs eArgs) {
