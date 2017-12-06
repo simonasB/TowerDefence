@@ -1,15 +1,17 @@
-﻿using TowerDefence.Core;
+﻿using System.Collections.Generic;
+using TowerDefence.Core;
+using TowerDefence.Towers;
 
 namespace TowerDefence.Memento {
     public class Memento {
-        private Game _state;
+        private readonly List<AbstractTower> _state;
 
-        public Memento(Game state) {
+        public Memento(List<AbstractTower> state) {
             _state = state;
         }
 
-        public void GetState(Originator originator) {
-            originator.RestoreState(this);
+        public void GetState(Game originator) {
+            originator.SetTowersState(this._state);
         }
     }
 }

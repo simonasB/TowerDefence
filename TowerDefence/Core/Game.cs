@@ -9,6 +9,7 @@ using TowerDefence.State;
 using TowerDefence.Towers;
 using TowerDefence.Towers.Decorator;
 using TowerDefence.Visitor;
+using TowerDefence.Memento;
 
 namespace TowerDefence.Core {
     public class Game {
@@ -24,7 +25,7 @@ namespace TowerDefence.Core {
 
         public List<Minion> Enemies { get; set; }
         public List<Bullet> Bullets { get; set; }
-        public List<AbstractTower> Towers { get; set; }
+        private List<AbstractTower> _towers;
         public List<AbstractTower> TowersToAdd { get; set; }
         public List<GameLevel> Levels { get; set; }
 
@@ -55,7 +56,7 @@ namespace TowerDefence.Core {
 
             Enemies = new List<Minion>();
             Bullets = new List<Bullet>();
-            Towers = new List<AbstractTower>();
+            _towers = new List<AbstractTower>();
             TowersToAdd = new List<AbstractTower>();
             Levels = new List<GameLevel>();
             GameInfos = new List<GameInfo>();
@@ -107,7 +108,7 @@ namespace TowerDefence.Core {
                 enemy.Accept(AmountCalculatorVisitor);
             }
 
-            foreach (var tower in Towers.Where(t => t.Dummy))
+            foreach (var tower in _towers.Where(t => t.Dummy))
             {
                 tower.Accept(AmountCalculatorVisitor);
                 if (tower.GetType() == typeof(ArcherTower))
@@ -121,9 +122,9 @@ namespace TowerDefence.Core {
             }
 
             if (_destroyedEnemies >= 5 && !_decorated) {
-                for (int i = 0; i < Towers.Count; i++) {
-                    if (Towers[i].Active) {
-                        Towers[i] = new KilledMinionsTowerDecorator(Towers[i]);
+                for (int i = 0; i < _towers.Count; i++) {
+                    if (_towers[i].Active) {
+                        _towers[i] = new KilledMinionsTowerDecorator(_towers[i]);
                     }
                 }
                 _decorated = true;
@@ -137,12 +138,12 @@ namespace TowerDefence.Core {
             // add new bought towers
             foreach (var item in TowersToAdd) {
                 item.EnableFire(true);
-                Towers.Add(item);
+                _towers.Add(item);
             }
             TowersToAdd.Clear();
 
             // tower firing
-            foreach (var item in Towers) {
+            foreach (var item in _towers) {
                 if (item.Dummy) {
                     item.CanBuy = item.CanBuyIt(Money);
                 } else {
@@ -189,7 +190,7 @@ namespace TowerDefence.Core {
                 item.DrawSelf(gfx, pen);
             }
 
-            foreach (var item in Towers) {
+            foreach (var item in _towers) {
                 item.DrawSelf(gfx, pen);
             }
 
@@ -207,5 +208,31 @@ namespace TowerDefence.Core {
 
             SelectedTower?.DrawSelf(gfx, pen);
         }
+
+        #region Memento
+
+        public List<AbstractTower> GetClickedTowers(int x, int y, int height) {
+            return _towers.Where(o =>
+                o.Dummy && (float)x > o.Center.X - o.Width / 2 && x < o.Center.X + o.Width / 2 &&
+                y > o.Center.Y - height / 2 && y < o.Center.Y + height / 2).ToList();
+        }
+
+        public void AddBoughtTower(AbstractTower tower) {
+            this._towers.Add(tower);
+        }
+
+        public Memento.Memento SaveTowersState() {
+            return new Memento.Memento(_towers.Select(o => (AbstractTower)o.Clone()).ToList());
+        }
+
+        public void RestoreTowersState(Memento.Memento restoreState) {
+            restoreState.GetState(this);
+        }
+
+        public void SetTowersState(List<AbstractTower> newState) {
+            _towers = newState;
+        }
+
+        #endregion
     }
 }

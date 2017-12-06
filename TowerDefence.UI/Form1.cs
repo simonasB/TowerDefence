@@ -22,7 +22,6 @@ namespace TowerDefence.UI
         private bool running = true;
         private Pen _myPen;
         private readonly CareTaker _careTaker = new CareTaker();
-        private Originator _originator;
 
         public Form1()
         {
@@ -87,12 +86,12 @@ namespace TowerDefence.UI
             var archerTowerFactory = Utils.GetFactory<ITowerFactory>(nameof(ArcherTowerFactory));
             var cannonTowerFactory = Utils.GetFactory<ITowerFactory>(nameof(CannonTowerFactory));
 
+            var towers = new List<AbstractTower>();
+
             var archerTowerToBuy = archerTowerFactory.CreateTower(new HardAttack());
             archerTowerToBuy.Center = new PointF(200, 300);
             archerTowerToBuy.Active = false;
             archerTowerToBuy.Dummy = true;
-
-            _game.Towers.Add(archerTowerToBuy);
 
             //var image = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pics/tower_archer.png"));
 
@@ -103,14 +102,10 @@ namespace TowerDefence.UI
             activeArcherTower.Placed = true;
             //activeArcherTower.Image = new Bitmap(image, new Size(activeArcherTower.Width, activeArcherTower.Height));
 
-            _game.Towers.Add(activeArcherTower);
-
             var cannonTowerToBuy = cannonTowerFactory.CreateTower(new HardAttack());
             cannonTowerToBuy.Center = new PointF(250, 300);
             cannonTowerToBuy.Active = false;
             cannonTowerToBuy.Dummy = true;
-
-            _game.Towers.Add(cannonTowerToBuy);
 
             var activeCannonTower = cannonTowerFactory.CreateTower(new HardAttack());
             activeCannonTower.Center = new PointF(150, 120);
@@ -119,13 +114,19 @@ namespace TowerDefence.UI
             activeCannonTower.Placed = true;
             //activeCannonTower.Image = new Bitmap(image, new Size(activeCannonTower.Width, activeCannonTower.Height)); ;
 
-            _game.Towers.Add(activeCannonTower);
-
             //_game.Running = true;
 
-            _originator = new Originator(_game);
-            var state = _originator.SaveState();
-            _careTaker.Add(state);
+            
+
+            towers.Add(activeArcherTower);
+            towers.Add(archerTowerToBuy);
+            towers.Add(cannonTowerToBuy);
+            towers.Add(activeCannonTower);
+            _game.SetTowersState(towers);
+
+            var memento = _game.SaveTowersState();
+
+            _careTaker.Add(memento);
         }
 
         public void Timer_Tick(object sender, EventArgs eArgs) {
@@ -166,9 +167,7 @@ namespace TowerDefence.UI
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e) {
-            List<AbstractTower> towers = _game.Towers.Where(x =>
-                x.Dummy && (float) e.X > x.Center.X - x.Width / 2 && e.X < x.Center.X + x.Width / 2 &&
-                e.Y > x.Center.Y - Height / 2 && e.Y < x.Center.Y + Height / 2).ToList();
+            List<AbstractTower> towers = _game.GetClickedTowers(e.X, e.Y, Height);
             if (towers.Count > 0 && towers.First().CanBuyIt(_game.Money)) {
                 //AbstractTower copy = Utils.ObjectCopier.Clone<AbstractTower>(towers.First());
                 AbstractTower copy = (AbstractTower)towers.First().Clone();
@@ -184,10 +183,12 @@ namespace TowerDefence.UI
                         _game.TowersToAdd.Add(_game.SelectedTower);
                     else // this is only enable tower placing and drwing on if paused
                     {
-                        _game.Towers.Add(_game.SelectedTower);
+                        _game.AddBoughtTower(_game.SelectedTower);                   
                         _game.SelectedTower.EnableFire(true);
                         Refresh();
                     }
+
+                    _careTaker.Add(_game.SaveTowersState());
 
                     _game.Money = _game.Money - _game.SelectedTower.Price;
                     _game.SelectedTower = null;
@@ -232,6 +233,14 @@ namespace TowerDefence.UI
         private void surrender_Click(object sender, EventArgs e) {
             labelState.Text = _game.GameState.OnSurrender();
             InitGame();
+        }
+
+        private void undoTower_Click(object sender, EventArgs e) {
+            if (_careTaker.Size() > 0) {
+                var memento = _careTaker.Get(_careTaker.Size() - 1);
+                _game.Money += 2;
+                _game.RestoreTowersState(memento);
+            }
         }
     }
 }

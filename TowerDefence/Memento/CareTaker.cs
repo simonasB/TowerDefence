@@ -2,7 +2,7 @@
 
 namespace TowerDefence.Memento {
     public class CareTaker {
-        private List<Memento> _statesList;
+        private readonly List<Memento> _statesList;
 
         public CareTaker() {
             _statesList = new List<Memento>();

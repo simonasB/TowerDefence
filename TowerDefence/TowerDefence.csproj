@@ -91,7 +91,6 @@
     <Compile Include="Mediator\MinionDamageControlManager.cs" />
     <Compile Include="Memento\CareTaker.cs" />
     <Compile Include="Memento\Memento.cs" />
-    <Compile Include="Memento\Originator.cs" />
     <Compile Include="Proxy\DiskGameObjectImageReader.cs" />
     <Compile Include="Proxy\GameObjectImageCacheProxy.cs" />
     <Compile Include="Proxy\IGameObjectImageReader.cs" />
