@@ -69,7 +69,7 @@
     <Compile Include="Logging\ErrorLogger.cs" />
     <Compile Include="Logging\FatalLogger.cs" />
     <Compile Include="Flyweight\GameObjectType.cs" />
-    <Compile Include="Flyweight\GameObjectTypeProvider.cs" />
+    <Compile Include="Flyweight\GameObjectTypeFactory.cs" />
     <Compile Include="Core\Calc.cs" />
     <Compile Include="Common\GameObject.cs" />
     <Compile Include="Common\IFactoryProvider.cs" />
@@ -85,7 +85,7 @@
     <Compile Include="Core\Game.cs" />
     <Compile Include="Core\GameLevel.cs" />
     <Compile Include="Core\Map.cs" />
-    <Compile Include="Flyweight\GameObjectTypeFactory.cs" />
+    <Compile Include="Flyweight\GameObjectTypeFactoryProvider.cs" />
     <Compile Include="Logging\InfoLogger.cs" />
     <Compile Include="Mediator\IMinionDamageControl.cs" />
     <Compile Include="Mediator\MinionDamageControl.cs" />

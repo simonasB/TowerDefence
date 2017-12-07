@@ -10,7 +10,7 @@ namespace TowerDefence.Minions.Beasts {
         {
             Health = 20;
             Name = nameof(WeakBeast);
-            GameObjectType = GameObjectTypeFactory.GetGameObjectType("beast");
+            GameObjectType = GameObjectTypeFactoryProvider.GetGameObjectType("beast");
         }
 
         public override void DrawSelf(Graphics gfx, Pen pen) {

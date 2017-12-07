@@ -15,7 +15,7 @@ namespace TowerDefence.Towers {
             Name = "Archer tower";
             Damage = 10;
             Range = 2;
-            GameObjectType = GameObjectTypeFactory.GetGameObjectType("archerTower");
+            GameObjectType = GameObjectTypeFactoryProvider.GetGameObjectType("archerTower");
         }
 
         public override Bullet Attack(List<Minion> enemies) {

@@ -1,18 +1,27 @@
-﻿using TowerDefence.Common;
+﻿using System.Collections.Generic;
+using TowerDefence.Common;
 using TowerDefence.Proxy;
 
 namespace TowerDefence.Flyweight {
     public class GameObjectTypeFactory {
-        private static GameObjectTypeProvider _gameObjectTypeProvider;
+        private readonly IGameObjectImageReader _gameObjectImageReader;
+        private readonly Dictionary<string, GameObjectType> _gameObjectTypes;
 
-        public static GameObjectType GetGameObjectType(string name) {
-            if (_gameObjectTypeProvider == null) {
-                var proxy = new GameObjectImageCacheProxy();
-                proxy.GetGameObjectImages();
-                _gameObjectTypeProvider = new GameObjectTypeProvider(proxy);
+        public GameObjectTypeFactory(IGameObjectImageReader gameObjectImageReader) {
+            _gameObjectImageReader = gameObjectImageReader;
+            _gameObjectTypes = new Dictionary<string, GameObjectType>();
+        }
+
+        public GameObjectType GetGameOjObjectType(string name) {
+            if (_gameObjectTypes.TryGetValue(name, out var gameObjectType)) {
+                return gameObjectType;
             }
 
-            return _gameObjectTypeProvider.GetGameOjObjectType(name);
+            gameObjectType = new GameObjectType(name, _gameObjectImageReader.GetGameObjectImage(name));
+
+            _gameObjectTypes.Add(name, gameObjectType);
+
+            return gameObjectType;
         }
-     }
+    }
 }

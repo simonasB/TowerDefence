@@ -10,7 +10,7 @@ namespace TowerDefence.Minions.Dragons {
         {
             Health = 10;
             Name = nameof(WeakDragon);
-            GameObjectType = GameObjectTypeFactory.GetGameObjectType("dragon");
+            GameObjectType = GameObjectTypeFactoryProvider.GetGameObjectType("dragon");
         }
 
         public override void DrawSelf(Graphics gfx, Pen pen) {

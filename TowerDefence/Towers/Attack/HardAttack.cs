@@ -32,7 +32,7 @@ namespace TowerDefence.Towers.Attack
         protected override Bullet CreateBullet(PointF start, PointF target) {
             return new HeavyBullet(start, target) {
                 TargetType = TargetType.Ground,
-                GameObjectType = GameObjectTypeFactory.GetGameObjectType("heavyBullet")
+                GameObjectType = GameObjectTypeFactoryProvider.GetGameObjectType("heavyBullet")
             };
         }
     }
