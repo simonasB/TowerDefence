@@ -60,7 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\NullAdapter.cs" />
+    <Compile Include="Database\NullDatabaseAdapter.cs" />
     <Compile Include="Logging\AbstractLogger.cs" />
     <Compile Include="Bullets\Bullet.cs" />
     <Compile Include="Bullets\HeavyBullet.cs" />
