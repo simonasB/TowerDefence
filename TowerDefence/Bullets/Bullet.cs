@@ -8,10 +8,6 @@ using TowerDefence.Minions;
 
 namespace TowerDefence.Bullets {
     public abstract class Bullet : GameObject{
-        public override void DrawSelf(Graphics gfx, Pen pen) {
-            throw new System.NotImplementedException();
-        }
-
         public const int DamageDefault = 0;
 
         public PointF Target { get; set; }
