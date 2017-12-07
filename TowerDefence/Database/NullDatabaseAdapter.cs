@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TowerDefence.Database.Entities;
 
 namespace TowerDefence.Database {
-    public class NullAdapter : IDatabaseAdapter{
+    public class NullDatabaseAdapter : IDatabaseAdapter{
         public void Save(GameInfo entity) {
             Logger.Instance().GetLogger().Info("Game info is saved to database");
         }
